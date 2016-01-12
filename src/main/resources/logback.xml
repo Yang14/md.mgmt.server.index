@@ -31,9 +31,9 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="md_rocksdb" level="DEBUGE"/>
+    <logger name="md.mgmt" level="DEBUGE"/>
 
-    <root level="DEBUGE">
+    <root level="INFO">
         <appender-ref ref="FILE"/>
         <appender-ref ref="stdout"/>
     </root>

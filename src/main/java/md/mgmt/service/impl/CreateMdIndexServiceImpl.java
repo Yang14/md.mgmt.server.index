@@ -64,6 +64,9 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
 
     private MdAttrPos createMdIndex(MdIndex mdIndex, boolean isDir) {
         DirMdIndex parentDir = indexRdbDao.getParentDirMdIndexByPath(mdIndex.getPath());
+        if (parentDir == null){
+            return null;
+        }
         String fileCode = commonModule.genFileCode();
         putFileMdIndex(parentDir, mdIndex, fileCode, isDir);
         if (isDir) {

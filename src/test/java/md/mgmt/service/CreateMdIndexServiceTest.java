@@ -3,6 +3,7 @@ package md.mgmt.service;
 import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.base.md.MdIndex;
 import md.mgmt.common.CommonModule;
+import md.mgmt.facade.resp.index.MdAttrPos;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +42,7 @@ public class CreateMdIndexServiceTest {
         when(commonModule.checkDistrCodeFit(anyInt())).thenReturn(true);
         when(commonModule.getMdLocation(anyInt())).thenReturn(new ClusterNodeInfo("be-01", 8008, 1000));
         when(commonModule.genMdLocation()).thenReturn(new ClusterNodeInfo("be-02", 8008, 1001));
-        if (createMdIndexService.createRootDir()){
+        if (createMdIndexService.createRootDir()) {
             logger.info("root dir create ok.");
         }
     }
@@ -49,14 +50,21 @@ public class CreateMdIndexServiceTest {
 
     @Test
     public void testCreateDirMdIndex() {
-        String path = "/";
-        String name = "bin";
-        createMdIndexService.createDirMdIndex(new MdIndex(path, name));
-    } 
+        String path = "/bin";
+        String name = "foo";
+        MdAttrPos mdAttrPos = createMdIndexService.createDirMdIndex(new MdIndex(path, name));
+        logger.info(mdAttrPos.toString());
+    }
+
     @Test
     public void testCreateFileMdIndex() {
-        String path = "/bin";
+        String path = "/bin/foo";
         String name = "a";
-        createMdIndexService.createFileMdIndex(new MdIndex(path,name));
+        MdAttrPos mdAttrPos = createMdIndexService.createFileMdIndex(new MdIndex(path, name));
+        if (mdAttrPos == null) {
+            logger.info("创建失败！");
+        } else {
+            logger.info(mdAttrPos.toString());
+        }
     }
 }

@@ -8,6 +8,9 @@ public class MdIndexKey {
     private String parentDirCode;
     private String fileName;
 
+    public MdIndexKey() {
+    }
+
     public MdIndexKey(String parentDirCode, String fileName) {
         this.parentDirCode = parentDirCode;
         this.fileName = fileName;

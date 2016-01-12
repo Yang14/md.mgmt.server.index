@@ -7,6 +7,9 @@ public class FileMdIndex {
     private String fileCode;
     private boolean isDir;
 
+    public FileMdIndex() {
+    }
+
     public FileMdIndex(String fileCode, boolean isDir) {
         this.fileCode = fileCode;
         this.isDir = isDir;
