@@ -7,6 +7,10 @@ import md.mgmt.facade.resp.index.MdAttrPos;
  * Created by Mr-yang on 16-1-11.
  */
 public interface CreateMdIndexService {
+    /**
+     * 系统启动时创建根目录
+     */
+    public boolean createRootDir();
 
     public MdAttrPos createFileMdIndex(MdIndex mdIndex);
 

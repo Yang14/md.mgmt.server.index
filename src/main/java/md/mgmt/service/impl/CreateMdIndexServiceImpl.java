@@ -32,6 +32,25 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     @Autowired
     private CommonModule commonModule;
 
+    /**
+     * 创建根目录节点
+     * 指定根目录的编号，自身编码和分布编码都是0
+     */
+    public boolean createRootDir() {
+        String parentCode = "0";
+        String fileCode = "0";
+        int distrCode = 0;
+        String name = "/";
+        String key = JSON.toJSONString(new MdIndexKey(parentCode, name));
+        if (!indexRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, true))) {
+            return false;
+        }
+        ArrayList<Integer> codes = new ArrayList<Integer>();
+        codes.add(distrCode);
+        DistrCodeList distrCodeList = new DistrCodeList();
+        distrCodeList.setCodeList(codes);
+        return indexRdbDao.putDistrCodeList(fileCode, distrCodeList);
+    }
 
     @Override
     public MdAttrPos createFileMdIndex(MdIndex mdIndex) {
@@ -47,8 +66,21 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         DirMdIndex parentDir = indexRdbDao.getParentDirMdIndexByPath(mdIndex.getPath());
         String fileCode = commonModule.genFileCode();
         putFileMdIndex(parentDir, mdIndex, fileCode, isDir);
+        if (isDir) {
+            //是目录,添加分布列表信息
+            putDistrCodeList(fileCode);
+        }
         MdAttrPos mdAttrPos = getMdAttrPos(parentDir, fileCode);
         return mdAttrPos;
+    }
+
+    private boolean putDistrCodeList(String fileCode) {
+        ArrayList<Integer> codes = new ArrayList<Integer>();
+        codes.add(commonModule.genDistrCode());
+        DistrCodeList distrCodeList = new DistrCodeList();
+        distrCodeList.setCodeList(codes);
+        logger.info("putDistrCodeList:" + fileCode + "->" + distrCodeList);
+        return indexRdbDao.putDistrCodeList(fileCode, distrCodeList);
     }
 
     /**
@@ -58,6 +90,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     private boolean putFileMdIndex(DirMdIndex parentDir, MdIndex mdIndex, String fileCode, boolean isDir) {
         String parentFileCode = parentDir.getMdIndex().getFileCode();
         String key = JSON.toJSONString(new MdIndexKey(parentFileCode, mdIndex.getName()));
+        logger.info("putFileMdIndex:" + key + ": fileCode" + fileCode);
         return indexRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, isDir));
     }
 

@@ -43,6 +43,9 @@ public class IndexRdbDaoImpl implements IndexRdbDao {
             String key = JSON.toJSONString(new MdIndexKey(code,nodes[i]));
             code = getFileMdIndex(key);
         }
+        if(code == null){   //路径不存在
+            return null;
+        }
         return getDirMdIndex(JSON.toJSONString(new MdIndexKey(code, nodes[nodes.length - 1])));
     }
 
