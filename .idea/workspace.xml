@@ -2,9 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95bc1756-9cdd-40b5-848c-01a1e54caeee" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/md/mgmt/service/CreateMdIndexService.java" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/service/CreateMdIndexService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/facade/resp/find/DirMdAttrPosList.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/facade/resp/find/FileMdAttrPosList.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/service/FindMdIndexService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/FindMdIndexServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/dao/IndexFindRdbDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/dao/impl/IndexFindRdbDaoImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/dao/entity/RangeCode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/md/mgmt/common/CommonModule.java" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/common/CommonModule.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/md/mgmt/common/impl/CommonModuleImpl.java" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/common/impl/CommonModuleImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/CreateMdIndexServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/CreateMdIndexServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/md/mgmt/service/CreateMdIndexServiceTest.java" afterPath="$PROJECT_DIR$/src/test/java/md/mgmt/service/CreateMdIndexServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/md/mgmt/dao/entity/DistrCodeList.java" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/dao/entity/DistrCodeList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/md/mgmt/dao/IndexRdbDao.java" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/dao/IndexRdbDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/md/mgmt/dao/impl/IndexRdbDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/dao/impl/IndexRdbDaoImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -70,22 +80,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CreateMdIndexServiceImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/CreateMdIndexServiceImpl.java">
+      <file leaf-file-name="IndexFindRdbDao.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/dao/IndexFindRdbDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="119" column="68" selection-start="4533" selection-end="4533" vertical-scroll-proportion="0.0" vertical-offset="1301" max-vertical-offset="2394">
+            <state line="18" column="26" selection-start="394" selection-end="394" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="546">
               <folding>
-                <element signature="e#1456#1465#0" expanded="true" />
-                <element signature="e#2499#2508#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreateMdIndexService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/CreateMdIndexService.java">
+      <file leaf-file-name="FindMdIndexServiceImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/FindMdIndexServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="0" selection-start="255" selection-end="255" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="609">
+            <state line="30" column="38" selection-start="950" selection-end="950" vertical-scroll-proportion="0.0" vertical-offset="441" max-vertical-offset="1218">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -96,27 +105,18 @@
       <file leaf-file-name="CreateMdIndexServiceTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/md/mgmt/service/CreateMdIndexServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="1" selection-start="2024" selection-end="2024" vertical-scroll-proportion="0.7944056" vertical-offset="377" max-vertical-offset="1092">
+            <state line="81" column="50" selection-start="2758" selection-end="2758" vertical-scroll-proportion="0.7062937" vertical-offset="797" max-vertical-offset="1659">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommonModule.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/common/CommonModule.java">
+      <file leaf-file-name="FindMdIndexService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/FindMdIndexService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="26" selection-start="425" selection-end="440" vertical-scroll-proportion="0.0" vertical-offset="104" max-vertical-offset="819">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IndexRdbDaoImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/dao/impl/IndexRdbDaoImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="28" selection-start="1558" selection-end="1558" vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="2226">
+            <state line="17" column="10" selection-start="344" selection-end="344" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="567">
               <folding>
-                <element signature="method#put#0;class#IndexRdbDaoImpl#0" expanded="false" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -143,14 +143,21 @@
         <option value="$PROJECT_DIR$/src/main/java/md/mgmt/dao/entity/MdIndexKey.java" />
         <option value="$PROJECT_DIR$/src/main/java/md/mgmt/dao/entity/FileMdIndex.java" />
         <option value="$PROJECT_DIR$/src/main/java/md/mgmt/dao/entity/DirMdIndex.java" />
-        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/dao/entity/DistrCodeList.java" />
         <option value="$PROJECT_DIR$/src/main/java/md/mgmt/facade/mapper/CommandMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/dao/IndexRdbDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/common/CommonModule.java" />
-        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/common/impl/CommonModuleImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/dao/impl/IndexRdbDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/md/mgmt/service/CreateMdIndexService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/facade/resp/find/FileMdAttrPosList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/facade/resp/find/DirMdAttrPosList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/dao/entity/RangeCode.java" />
+        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/dao/IndexRdbDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/dao/impl/IndexRdbDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/CreateMdIndexServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/dao/IndexFindRdbDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/dao/impl/IndexFindRdbDaoImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/common/CommonModule.java" />
+        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/dao/entity/DistrCodeList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/common/impl/CommonModuleImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/service/FindMdIndexService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/FindMdIndexServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/md/mgmt/service/CreateMdIndexServiceTest.java" />
       </list>
     </option>
@@ -350,7 +357,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="facade" />
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="impl" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -377,14 +388,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="mgmt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="facade" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapper" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -452,36 +455,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="md.mgmt.server.index" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="md.mgmt.server.index" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mgmt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -501,6 +474,10 @@
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -775,12 +752,12 @@
       <updated>1452508137498</updated>
       <workItem from="1452508139271" duration="13720000" />
       <workItem from="1452563929140" duration="8132000" />
-      <workItem from="1452587886503" duration="2936000" />
+      <workItem from="1452587886503" duration="10289000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24788000" />
+    <option name="totallyTimeSpent" value="32141000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
@@ -791,6 +768,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -808,7 +786,6 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5833333" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -839,8 +816,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="88" column="37" selection-start="3359" selection-end="3359" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2058">
           <folding>
-            <element signature="e#1456#1465#0" expanded="true" />
-            <element signature="e#2499#2508#0" expanded="true" />
+            <element signature="e#1566#1575#0" expanded="true" />
+            <element signature="e#2681#2690#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -872,8 +849,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="31" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.0" vertical-offset="392" max-vertical-offset="1806">
           <folding>
-            <element signature="e#1456#1465#0" expanded="true" />
-            <element signature="e#2499#2508#0" expanded="true" />
+            <element signature="e#1566#1575#0" expanded="true" />
+            <element signature="e#2681#2690#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -911,39 +888,33 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/dao/entity/DistrCodeList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="651">
-          <folding>
-            <element signature="e#246#247#0" expanded="true" />
-            <element signature="e#306#307#0" expanded="true" />
-            <element signature="e#346#347#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/logback.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="945" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="945">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/facade/IndexServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="41" selection-start="876" selection-end="876" vertical-scroll-proportion="0.47132868" vertical-offset="146" max-vertical-offset="1113" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/facade/resp/index/MdAttrPosDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="90" selection-end="90" vertical-scroll-proportion="0.14685315" vertical-offset="0" max-vertical-offset="798">
-          <folding />
+        <state line="23" column="41" selection-start="876" selection-end="876" vertical-scroll-proportion="0.47132868" vertical-offset="146" max-vertical-offset="1113">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/facade/IndexServerHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="51" selection-start="1523" selection-end="1523" vertical-scroll-proportion="0.5286713" vertical-offset="126" max-vertical-offset="924" />
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/md/mgmt/md.mgmt.base/1.0/md.mgmt.base-1.0.jar!/md/mgmt/base/md/ClusterNodeInfo.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="158" selection-end="158" vertical-scroll-proportion="0.1521739" vertical-offset="0" max-vertical-offset="690" />
+        <state line="38" column="51" selection-start="1523" selection-end="1523" vertical-scroll-proportion="0.5286713" vertical-offset="126" max-vertical-offset="924">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/spring.xml">
@@ -989,30 +960,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/dao/entity/DistrCodeList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="45" selection-start="216" selection-end="216" vertical-scroll-proportion="0.2937063" vertical-offset="0" max-vertical-offset="715">
-          <folding>
-            <element signature="e#246#247#0" expanded="true" />
-            <element signature="e#306#307#0" expanded="true" />
-            <element signature="e#346#347#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/facade/mapper/CommandMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="44" selection-start="1347" selection-end="1347" vertical-scroll-proportion="1.1468531" vertical-offset="20" max-vertical-offset="1050">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="36" selection-start="1336" selection-end="1336" vertical-scroll-proportion="1.027972" vertical-offset="0" max-vertical-offset="2562">
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1021,37 +974,63 @@
         <state line="20" column="17" selection-start="633" selection-end="633" vertical-scroll-proportion="0.5782609" vertical-offset="0" max-vertical-offset="690" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/common/impl/CommonModuleImpl.java">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="18" selection-start="373" selection-end="373" vertical-scroll-proportion="0.33286715" vertical-offset="77" max-vertical-offset="861" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/dao/IndexRdbDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="582" selection-end="582" vertical-scroll-proportion="0.64615387" vertical-offset="0" max-vertical-offset="715">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="715">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/dao/impl/IndexRdbDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/facade/resp/find/FileMdAttrPosList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="28" selection-start="1558" selection-end="1558" vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="2226">
+        <state line="11" column="51" selection-start="176" selection-end="228" vertical-scroll-proportion="0.17762238" vertical-offset="104" max-vertical-offset="1092">
           <folding>
-            <element signature="method#put#0;class#IndexRdbDaoImpl#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#532#533#0" expanded="true" />
+            <element signature="e#571#572#0" expanded="true" />
+            <element signature="e#650#651#0" expanded="true" />
+            <element signature="e#706#707#0" expanded="true" />
+            <element signature="e#741#742#0" expanded="true" />
+            <element signature="e#772#773#0" expanded="true" />
+            <element signature="e#820#821#0" expanded="true" />
+            <element signature="e#860#861#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/common/CommonModule.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/facade/resp/index/MdAttrPosDto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="26" selection-start="425" selection-end="440" vertical-scroll-proportion="0.0" vertical-offset="104" max-vertical-offset="819">
+        <state line="5" column="13" selection-start="90" selection-end="90" vertical-scroll-proportion="0.14685315" vertical-offset="0" max-vertical-offset="798">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/dao/entity/RangeCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="18" selection-start="761" selection-end="761" vertical-scroll-proportion="0.64755243" vertical-offset="293" max-vertical-offset="1029">
+          <folding>
+            <element signature="e#421#422#0" expanded="true" />
+            <element signature="e#457#458#0" expanded="true" />
+            <element signature="e#522#523#0" expanded="true" />
+            <element signature="e#572#573#0" expanded="true" />
+            <element signature="e#607#608#0" expanded="true" />
+            <element signature="e#638#639#0" expanded="true" />
+            <element signature="e#686#687#0" expanded="true" />
+            <element signature="e#726#727#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="32" selection-start="1217" selection-end="1217" vertical-scroll-proportion="1.2085106" vertical-offset="62" max-vertical-offset="2562">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/CreateMdIndexService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="255" selection-end="255" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="609">
+        <state line="8" column="35" selection-start="180" selection-end="180" vertical-scroll-proportion="0.19574468" vertical-offset="76" max-vertical-offset="609">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1060,17 +1039,113 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/CreateMdIndexServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="119" column="68" selection-start="4533" selection-end="4533" vertical-scroll-proportion="0.0" vertical-offset="1301" max-vertical-offset="2394">
+        <state line="36" column="0" selection-start="1097" selection-end="1097" vertical-scroll-proportion="0.5286713" vertical-offset="0" max-vertical-offset="2520">
           <folding>
-            <element signature="e#1456#1465#0" expanded="true" />
-            <element signature="e#2499#2508#0" expanded="true" />
+            <element signature="e#1566#1575#0" expanded="true" />
+            <element signature="e#2681#2690#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/dao/IndexRdbDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="30" selection-start="267" selection-end="267" vertical-scroll-proportion="0.35244754" vertical-offset="0" max-vertical-offset="715">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/dao/impl/IndexRdbDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="5" selection-start="818" selection-end="818" vertical-scroll-proportion="0.6167832" vertical-offset="0" max-vertical-offset="756">
+          <folding>
+            <element signature="method#put#0;class#IndexRdbDaoImpl#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/dao/entity/DistrCodeList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="5" selection-start="419" selection-end="419" vertical-scroll-proportion="0.5874126" vertical-offset="0" max-vertical-offset="735">
+          <folding>
+            <element signature="e#292#293#0" expanded="true" />
+            <element signature="e#323#324#0" expanded="true" />
+            <element signature="e#378#379#0" expanded="true" />
+            <element signature="e#418#419#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/common/impl/CommonModuleImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="8" selection-start="840" selection-end="852" vertical-scroll-proportion="0.82377625" vertical-offset="188" max-vertical-offset="966">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/common/CommonModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="6" selection-start="591" selection-end="591" vertical-scroll-proportion="0.765035" vertical-offset="146" max-vertical-offset="861">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/facade/resp/find/DirMdAttrPosList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="227" selection-end="227" vertical-scroll-proportion="0.35897437" vertical-offset="0" max-vertical-offset="777">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/md/mgmt/md.mgmt.base/1.0/md.mgmt.base-1.0.jar!/md/mgmt/base/md/ClusterNodeInfo.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="158" selection-end="158" vertical-scroll-proportion="0.15509601" vertical-offset="0" max-vertical-offset="693">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/FindMdIndexService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="10" selection-start="344" selection-end="344" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="567">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/dao/IndexFindRdbDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="26" selection-start="394" selection-end="394" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="546">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/dao/impl/IndexFindRdbDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="49" selection-start="2497" selection-end="2497" vertical-scroll-proportion="0.7944056" vertical-offset="965" max-vertical-offset="1869">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getDirMdIndex#0;class#IndexFindRdbDaoImpl#0" expanded="false" />
+            <element signature="method#getFileMdIndex#0;class#IndexFindRdbDaoImpl#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/FindMdIndexServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="38" selection-start="950" selection-end="950" vertical-scroll-proportion="0.0" vertical-offset="441" max-vertical-offset="1218">
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/md/mgmt/service/CreateMdIndexServiceTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="1" selection-start="2024" selection-end="2024" vertical-scroll-proportion="0.7944056" vertical-offset="377" max-vertical-offset="1092">
+        <state line="81" column="50" selection-start="2758" selection-end="2758" vertical-scroll-proportion="0.7062937" vertical-offset="797" max-vertical-offset="1659">
           <folding />
         </state>
       </provider>

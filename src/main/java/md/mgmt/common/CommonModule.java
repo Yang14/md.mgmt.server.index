@@ -2,6 +2,8 @@ package md.mgmt.common;
 
 import md.mgmt.base.md.ClusterNodeInfo;
 
+import java.util.List;
+
 /**
  * Created by Mr-yang on 16-1-11.
  */
@@ -30,4 +32,6 @@ public interface CommonModule {
      * 生成分布编码对应的元数据节点信息
      */
     public ClusterNodeInfo genMdLocation();
+
+    public List<ClusterNodeInfo> getMdLocationList(List<Integer> distrCodeList);
 }

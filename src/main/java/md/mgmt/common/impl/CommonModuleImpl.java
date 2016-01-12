@@ -4,6 +4,8 @@ import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.common.CommonModule;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created by Mr-yang on 16-1-11.
  */
@@ -32,6 +34,11 @@ public class CommonModuleImpl implements CommonModule {
 
     @Override
     public ClusterNodeInfo genMdLocation() {
+        return null;
+    }
+
+    @Override
+    public List<ClusterNodeInfo> getMdLocationList(List<Integer> distrCodeList) {
         return null;
     }
 }
