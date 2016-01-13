@@ -40,7 +40,7 @@ public class CommonModuleImpl implements CommonModule {
         } else if (distrCode % 2 == 0) {
             clusterNodeInfo.setIp("node-02");
         } else {
-            clusterNodeInfo.setIp("node-01");
+            clusterNodeInfo.setIp("node-01"); 
         }
         clusterNodeInfo.setDistrCode(distrCode);
         clusterNodeInfo.setPort(8008);
