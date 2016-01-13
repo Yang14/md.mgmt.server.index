@@ -5,6 +5,8 @@ import md.mgmt.common.CommonModule;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 /**
  * Created by Mr-yang on 16-1-11.
@@ -13,21 +15,22 @@ import java.util.List;
 public class CommonModuleImpl implements CommonModule {
     @Override
     public String genFileCode() {
-        return null;
+        return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
     @Override
     public Integer genDistrCode() {
-        return null;
+        return new Random().nextInt();
     }
 
     @Override
     public boolean checkDistrCodeFit(Integer distrCode) {
-        return false;
+        return true;
     }
 
     @Override
     public ClusterNodeInfo getMdLocation(Integer distrCode) {
+        if (distrCode % 1 ==0)
         return null;
     }
 
