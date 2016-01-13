@@ -21,7 +21,7 @@ public class CommonModuleImpl implements CommonModule {
 
     @Override
     public Integer genDistrCode() {
-        return new Random().nextInt();
+        return new Random().nextInt()&0x0FFFFFFFF;
     }
 
     @Override

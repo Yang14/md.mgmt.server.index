@@ -87,7 +87,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         codes.add(commonModule.genDistrCode());
         DistrCodeList distrCodeList = new DistrCodeList();
         distrCodeList.setCodeList(codes);
-        logger.info("putDistrCodeList:" + fileCode + "->" + distrCodeList);
+//        logger.info("putDistrCodeList:" + fileCode + "->" + distrCodeList);
         return indexRdbDao.putDistrCodeList(fileCode, distrCodeList);
     }
 
@@ -98,7 +98,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     private boolean putFileMdIndex(DirMdIndex parentDir, MdIndex mdIndex, String fileCode, boolean isDir) {
         String parentFileCode = parentDir.getMdIndex().getFileCode();
         String key = JSON.toJSONString(new MdIndexKey(parentFileCode, mdIndex.getName()));
-        logger.info("putFileMdIndex:" + key + ": fileCode" + fileCode);
+//        logger.info("putFileMdIndex:" + key + ": fileCode-->" + fileCode);
         return indexRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, isDir));
     }
 

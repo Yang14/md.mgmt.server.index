@@ -59,7 +59,7 @@ class IndexFindRdbDaoImpl implements IndexFindRdbDao {
         String[] nodes = path.split("/");
         nodes[0] = "/";
         String code = "0";
-        for (int i = 0; i < nodes.length - 1 && code != null; ++i) {
+        for (int i = 0; i < nodes.length && code != null; ++i) {
             String key = JSON.toJSONString(new MdIndexKey(code, nodes[i]));
             code = getFileMdIndex(key).getFileCode();
         }
