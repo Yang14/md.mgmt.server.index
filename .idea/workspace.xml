@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="36acbfb8-4566-4430-b5b2-a85cc477f18c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/md/mgmt/common/impl/CommonModuleImpl.java" afterPath="$PROJECT_DIR$/src/main/java/md/mgmt/common/impl/CommonModuleImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/md/mgmt/service/CreateMdIndexServiceTest.java" afterPath="$PROJECT_DIR$/src/test/java/md/mgmt/service/CreateMdIndexServiceTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="md.mgmt.server.index.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -22,7 +20,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <breakpoint_any>
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
         <option name="NOTIFY_UNCAUGHT" value="true" />
@@ -58,6 +56,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -70,7 +69,7 @@
       <file leaf-file-name="CreateMdIndexServiceTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/md/mgmt/service/CreateMdIndexServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="39" selection-start="1312" selection-end="1312" vertical-scroll-proportion="0.0" vertical-offset="230" max-vertical-offset="1260">
+            <state line="40" column="39" selection-start="1312" selection-end="1312" vertical-scroll-proportion="0.0" vertical-offset="840" max-vertical-offset="1470">
               <folding />
             </state>
           </provider>
@@ -79,7 +78,7 @@
       <file leaf-file-name="CommonModuleImpl.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/common/impl/CommonModuleImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="13" selection-start="694" selection-end="694" vertical-scroll-proportion="0.2680851" vertical-offset="378" max-vertical-offset="1386">
+            <state line="31" column="13" selection-start="694" selection-end="694" vertical-scroll-proportion="-0.30638298" vertical-offset="648" max-vertical-offset="1386">
               <folding>
                 <element signature="e#1593#1610#0" expanded="true" />
               </folding>
@@ -90,10 +89,8 @@
       <file leaf-file-name="FindMdIndexServiceImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/FindMdIndexServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="945">
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1260">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -101,12 +98,8 @@
       <file leaf-file-name="CreateMdIndexServiceImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/CreateMdIndexServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="13" selection-start="808" selection-end="808" vertical-scroll-proportion="0.0" vertical-offset="1764" max-vertical-offset="2520">
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1589#1598#0" expanded="false" />
-                <element signature="e#2704#2713#0" expanded="false" />
-              </folding>
+            <state line="27" column="13" selection-start="808" selection-end="808" vertical-scroll-proportion="0.0" vertical-offset="567" max-vertical-offset="2919">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -183,6 +176,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -431,7 +425,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -770,11 +763,12 @@
       <workItem from="1452608663876" duration="209000" />
       <workItem from="1452608894674" duration="1406000" />
       <workItem from="1452651747929" duration="1555000" />
+      <workItem from="1452653826857" duration="74000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3170000" />
+    <option name="totallyTimeSpent" value="3244000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
@@ -800,12 +794,12 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3285528" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295129" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -831,6 +825,50 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/test/java/md/mgmt/service/CreateMdIndexServiceTest.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="39" selection-start="1312" selection-end="1312" vertical-scroll-proportion="0.0" vertical-offset="840" max-vertical-offset="1470">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/common/impl/CommonModuleImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="13" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0" vertical-offset="651" max-vertical-offset="1386">
+          <folding>
+            <element signature="e#1593#1610#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/FindMdIndexServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1260">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/CreateMdIndexServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="13" selection-start="808" selection-end="808" vertical-scroll-proportion="0.0" vertical-offset="567" max-vertical-offset="2919">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/logback.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="945">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/md/mgmt/service/CreateMdIndexServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1659">
           <folding />
         </state>
@@ -839,9 +877,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/FindMdIndexServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1260">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -930,20 +966,14 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/FindMdIndexServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/service/impl/CreateMdIndexServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="13" selection-start="808" selection-end="808" vertical-scroll-proportion="0.0" vertical-offset="1764" max-vertical-offset="2520">
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1589#1598#0" expanded="false" />
-            <element signature="e#2704#2713#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -956,7 +986,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/md/mgmt/common/impl/CommonModuleImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="13" selection-start="694" selection-end="694" vertical-scroll-proportion="0.2680851" vertical-offset="378" max-vertical-offset="1386">
+        <state line="31" column="13" selection-start="694" selection-end="694" vertical-scroll-proportion="-0.30638298" vertical-offset="648" max-vertical-offset="1386">
           <folding>
             <element signature="e#1593#1610#0" expanded="true" />
           </folding>
