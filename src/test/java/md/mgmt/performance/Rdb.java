@@ -1,5 +1,6 @@
 package md.mgmt.performance;
 
+import org.junit.Test;
 import org.rocksdb.*;
 import org.rocksdb.util.SizeUnit;
 import org.slf4j.Logger;
@@ -17,28 +18,10 @@ public class Rdb {
         RocksDB.loadLibrary();
     }
 
-    static {
-        RocksDB.loadLibrary();
-    }
-
-    public static void main(String[] args) {
-        if (args.length < 1) {
-            System.out.println("usage: RocksDBSample db_path");
-            return;
-        }
-        String db_path = args[0];
-        String db_path_not_found = db_path + "_not_found";
-
+    @Test
+    public void testRdbWithOptionConfig() {
         RocksDB db = null;
         Options options = new Options();
-        try {
-            db = RocksDB.open(options, db_path_not_found);
-            assert (false);
-        } catch (RocksDBException e) {
-            System.out.format("caught the expceted exception -- %s\n", e);
-            assert (db == null);
-        }
-
         try {
             options.setCreateIfMissing(true)
                     .createStatistics()
@@ -62,24 +45,50 @@ public class Rdb {
                 10000, 10));
 
         try {
-            db = RocksDB.open(options, db_path);
-            db.put("hello".getBytes(), "world".getBytes());
-            byte[] value = db.get("hello".getBytes());
-            assert ("world".equals(new String(value)));
-            String str = db.getProperty("rocksdb.stats");
-            assert (str != null && !str.equals(""));
+            db = RocksDB.open(options, DB_PATH);
+            int count = 10000;
+            System.out.println("\n\n\n" + String.valueOf(System.currentTimeMillis()));
+            long start = System.currentTimeMillis();
+            for (int i = 0; i < count; i++) {
+                db.put(("{hello}" + i).getBytes(),
+                        ("{\"isDir\":\"true\",\"fileCode\":\"a47486fa7be74ee08b9a7adf04afb7af\"}").getBytes());
+            }
+            long end = System.currentTimeMillis();
+            System.out.println(String.valueOf(System.currentTimeMillis()));
+            System.out.println(
+                    String.format("\nCreate %s dir use Total time: %s ms\navg time: %sms\n\n\n",
+                            count, (end - start), (end - start) / (count * 1.0)));
         } catch (RocksDBException e) {
             System.out.format("[ERROR] caught the unexpceted exception -- %s\n", e);
-            assert (db == null);
-            assert (false);
+        } finally {
+            db.close();
+            options.dispose();
         }
-        // be sure to release the c++ pointer
-        db.close();
+    }
 
-        ReadOptions readOptions = new ReadOptions();
-        readOptions.setFillCache(false);
-
-        options.dispose();
-        readOptions.dispose();
+    @Test
+    public void testPutWithoutConfig() {
+        Options options = new Options().setCreateIfMissing(true);
+        RocksDB db = null;
+        try {
+            db = RocksDB.open(options, DB_PATH);
+            int count = 10000;
+            System.out.println("\n\n\n" + String.valueOf(System.currentTimeMillis()));
+            long start = System.currentTimeMillis();
+            for (int i = 0; i < count; i++) {
+                db.put(("{hello}" + i).getBytes(),
+                        ("{\"isDir\":\"true\",\"fileCode\":\"a47486fa7be74ee08b9a7adf04afb7af\"}").getBytes());
+            }
+            long end = System.currentTimeMillis();
+            System.out.println(String.valueOf(System.currentTimeMillis()));
+            System.out.println(
+                    String.format("\nCreate %s dir use Total time: %s ms\navg time: %sms\n\n\n",
+                            count, (end - start), (end - start) / (count * 1.0)));
+        } catch (Exception e) {
+            logger.error(String.format("[ERROR] caught the unexpceted exception -- %s\n", e));
+        } finally {
+            if (db != null) db.close();
+            options.dispose();
+        }
     }
 }
