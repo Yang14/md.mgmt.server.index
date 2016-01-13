@@ -33,9 +33,16 @@ public class IndexServerHandler extends ChannelInboundHandlerAdapter {
     private CommandMapper commandMapper = new CommandMapper();
 
     @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("Beans.xml");
+    }
+
+    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        String result = commandMapper.selectService((String)msg);
-        ChannelFuture f = ctx.writeAndFlush(result);
+        logger.info(String.valueOf(msg));
+        String respStr = commandMapper.selectService((String)msg);
+        ChannelFuture f = ctx.writeAndFlush(respStr);
         f.addListener(ChannelFutureListener.CLOSE);
     }
 

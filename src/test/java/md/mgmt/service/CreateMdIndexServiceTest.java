@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Random;
-
 /**
  * Created by Mr-yang on 16-1-11.
  */
@@ -42,6 +40,9 @@ public class CreateMdIndexServiceTest {
         createMdIndexService.createDirMdIndex(new MdIndex(path, name));
     }
 
+    /**
+     * 每次都打开、关闭rdb消耗大量时间，测试使用全局或者缓存的方式能加速创建效率，每秒能有10w才800ms
+     */
     @Test
     public void testBatchCreateDirTime() {
         String path1 = "/bin/foo";
@@ -94,10 +95,6 @@ public class CreateMdIndexServiceTest {
         }
     }
 
-    //putFileMdIndex:{"fileName":"a1","parentDirCode":"b581ce3c0464435c923ad2e7ad785a38"}:
-//fileCode-->fbc55ab206204a568fcdb83103343461
-//MdAttrPos{exactCode=ExactCode{distrCode='-671204313', fileCode='fbc55ab206204a568fcdb83103343461'},
-// clusterNodeInfo=ClusterNodeInfo{ip='node-03', port=8008, distrCode='-671204313'}}
     @Test
     public void testFindFileMdIndex() {
         String path = "/bin/foo";
