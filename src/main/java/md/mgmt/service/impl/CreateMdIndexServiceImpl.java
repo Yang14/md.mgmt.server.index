@@ -5,6 +5,7 @@ import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.base.md.ExactCode;
 import md.mgmt.base.md.MdIndex;
 import md.mgmt.common.CommonModule;
+import md.mgmt.dao.IndexFindRdbDao;
 import md.mgmt.dao.IndexRdbDao;
 import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.DistrCodeList;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Mr-yang on 16-1-11.
@@ -28,6 +30,8 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
 
     @Autowired
     private IndexRdbDao indexRdbDao;
+    @Autowired
+    private IndexFindRdbDao indexFindRdbDao;
 
     @Autowired
     private CommonModule commonModule;
@@ -36,6 +40,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
      * 创建根目录节点
      * 指定根目录的编号，自身编码和分布编码都是0
      */
+    @Override
     public boolean createRootDir() {
         String parentCode = "0";
         String fileCode = "0";
@@ -63,8 +68,8 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     }
 
     private MdAttrPos createMdIndex(MdIndex mdIndex, boolean isDir) {
-        DirMdIndex parentDir = indexRdbDao.getParentDirMdIndexByPath(mdIndex.getPath());
-        if (parentDir == null){
+        DirMdIndex parentDir = indexFindRdbDao.getParentDirMdIndexByPath(mdIndex.getPath());
+        if (parentDir == null) {
             return null;
         }
         String fileCode = commonModule.genFileCode();
@@ -98,7 +103,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     }
 
     private MdAttrPos getMdAttrPos(DirMdIndex parentDir, String fileCode) {
-        ArrayList<Integer> distrCodeList = parentDir.getDistrCodeList().getCodeList();
+        List<Integer> distrCodeList = parentDir.getDistrCodeList().getCodeList();
         int distrCode = distrCodeList.get(distrCodeList.size() - 1);
         boolean isFit = commonModule.checkDistrCodeFit(distrCode);
         MdAttrPos mdAttrPos = new MdAttrPos();
@@ -118,7 +123,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
 
     private boolean updateDistrCodeListWithNewCode(DirMdIndex parentDir, Integer newCode) {
         String parentFileCode = parentDir.getMdIndex().getFileCode();
-        ArrayList<Integer> distrCodeList = parentDir.getDistrCodeList().getCodeList();
+        List<Integer> distrCodeList = parentDir.getDistrCodeList().getCodeList();
         distrCodeList.add(newCode);
         DistrCodeList distrCodeList1 = parentDir.getDistrCodeList();
         distrCodeList1.setCodeList(distrCodeList);

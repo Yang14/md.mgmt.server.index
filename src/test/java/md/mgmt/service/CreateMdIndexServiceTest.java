@@ -3,6 +3,8 @@ package md.mgmt.service;
 import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.base.md.MdIndex;
 import md.mgmt.common.CommonModule;
+import md.mgmt.facade.resp.find.DirMdAttrPosList;
+import md.mgmt.facade.resp.find.FileMdAttrPosList;
 import md.mgmt.facade.resp.index.MdAttrPos;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +35,10 @@ public class CreateMdIndexServiceTest {
 
     @Mock
     private CommonModule commonModule;
+
+    @InjectMocks
+    @Autowired
+    private FindMdIndexService findMdIndexService;
 
     @Before
     public void initMocks() {
@@ -66,5 +72,21 @@ public class CreateMdIndexServiceTest {
         } else {
             logger.info(mdAttrPos.toString());
         }
+    }
+
+    @Test
+    public void testFindFileMdIndex() {
+        String path = "/bin/foo";
+        String name = "a";
+        FileMdAttrPosList fileMdAttrPosList = findMdIndexService.findFileMdIndex(new MdIndex(path, name));
+        logger.info(fileMdAttrPosList.toString());
+    }
+
+    @Test
+    public void testFindDirMdIndex() {
+        String path = "/bin";
+        String name = "foo";
+        DirMdAttrPosList dirMdAttrPosList = findMdIndexService.findDirMdIndex(new MdIndex(path, name));
+        logger.info(dirMdAttrPosList.toString());
     }
 }
