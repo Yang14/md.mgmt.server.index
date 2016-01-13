@@ -4,6 +4,7 @@ import md.mgmt.base.md.MdIndex;
 import md.mgmt.facade.resp.find.DirMdAttrPosList;
 import md.mgmt.facade.resp.find.FileMdAttrPosList;
 import md.mgmt.facade.resp.index.MdAttrPos;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -25,6 +26,15 @@ public class CreateMdIndexServiceTest {
 
     @Autowired
     private FindMdIndexService findMdIndexService;
+
+    @Before
+    public void setUp() {
+        if (createMdIndexService.createRootDir()) {
+            if (createMdIndexService.createRootDir()) {
+                logger.info("root dir create ok.");
+            }
+        }
+    }
 
     @Test
     public void testCreateDirMdIndex() {
