@@ -3,12 +3,10 @@ package md.mgmt.service.impl;
 import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.base.md.MdIndex;
 import md.mgmt.common.CommonModule;
-import md.mgmt.common.impl.CommonModuleImpl;
 import md.mgmt.dao.IndexFindRdbDao;
 import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
-import md.mgmt.dao.impl.IndexFindRdbDaoImpl;
 import md.mgmt.facade.resp.find.DirMdAttrPosList;
 import md.mgmt.facade.resp.find.FileMdAttrPosList;
 import md.mgmt.service.FindMdIndexService;
@@ -27,10 +25,10 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
     private Logger logger = LoggerFactory.getLogger(FindMdIndexServiceImpl.class);
 
     @Autowired
-    private IndexFindRdbDao indexFindRdbDao = new IndexFindRdbDaoImpl();
+    private IndexFindRdbDao indexFindRdbDao;
 
     @Autowired
-    private CommonModule commonModule = new CommonModuleImpl();
+    private CommonModule commonModule;
 
     @Override
     public FileMdAttrPosList findFileMdIndex(MdIndex mdIndex) {

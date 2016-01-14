@@ -5,15 +5,12 @@ import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.base.md.ExactCode;
 import md.mgmt.base.md.MdIndex;
 import md.mgmt.common.CommonModule;
-import md.mgmt.common.impl.CommonModuleImpl;
 import md.mgmt.dao.IndexFindRdbDao;
 import md.mgmt.dao.IndexRdbDao;
 import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
 import md.mgmt.dao.entity.MdIndexKey;
-import md.mgmt.dao.impl.IndexFindRdbDaoImpl;
-import md.mgmt.dao.impl.IndexRdbDaoImpl;
 import md.mgmt.facade.resp.index.MdAttrPos;
 import md.mgmt.service.CreateMdIndexService;
 import org.slf4j.Logger;
@@ -32,12 +29,12 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     private Logger logger = LoggerFactory.getLogger(CreateMdIndexServiceImpl.class);
 
     @Autowired
-    private IndexRdbDao indexRdbDao = new IndexRdbDaoImpl();
+    private IndexRdbDao indexRdbDao;
     @Autowired
-    private IndexFindRdbDao indexFindRdbDao = new IndexFindRdbDaoImpl();
+    private IndexFindRdbDao indexFindRdbDao;
 
     @Autowired
-    private CommonModule commonModule = new CommonModuleImpl();
+    private CommonModule commonModule;
 
     /**
      * 创建根目录节点
