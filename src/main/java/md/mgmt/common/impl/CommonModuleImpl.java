@@ -42,6 +42,7 @@ public class CommonModuleImpl implements CommonModule {
         } else {
             clusterNodeInfo.setIp("node-01");
         }
+        clusterNodeInfo.setIp("192.168.0.13");
         clusterNodeInfo.setDistrCode(distrCode);
         clusterNodeInfo.setPort(8008);
         return clusterNodeInfo;
