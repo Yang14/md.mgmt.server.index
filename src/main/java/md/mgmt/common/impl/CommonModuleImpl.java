@@ -20,17 +20,17 @@ public class CommonModuleImpl implements CommonModule {
     }
 
     @Override
-    public Integer genDistrCode() {
-        return new Random().nextInt() & 0x0FFFFFFFF;
+    public Long genDistrCode() {
+        return Long.valueOf(new Random().nextInt() & 0x0FFFFFFFF);
     }
 
     @Override
-    public boolean checkDistrCodeFit(Integer distrCode) {
+    public boolean checkDistrCodeFit(Long distrCode) {
         return true;
     }
 
     @Override
-    public ClusterNodeInfo getMdLocation(Integer distrCode) {
+    public ClusterNodeInfo getMdLocation(Long distrCode) {
         if (distrCode == null) {
             return null;
         }
@@ -54,12 +54,12 @@ public class CommonModuleImpl implements CommonModule {
     }
 
     @Override
-    public List<ClusterNodeInfo> getMdLocationList(List<Integer> distrCodeList) {
+    public List<ClusterNodeInfo> getMdLocationList(List<Long> distrCodeList) {
         if (distrCodeList == null) {
             return null;
         }
         List<ClusterNodeInfo> nodeInfos = new ArrayList<ClusterNodeInfo>();
-        for (int code : distrCodeList) {
+        for (long code : distrCodeList) {
             nodeInfos.add(getMdLocation(code));
         }
         return nodeInfos;

@@ -44,13 +44,13 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     public boolean createRootDir() {
         String parentCode = "0";
         String fileCode = "0";
-        int distrCode = 0;
+        long distrCode = 0;
         String name = "/";
         String key = JSON.toJSONString(new MdIndexKey(parentCode, name));
         if (!indexRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, true))) {
             return false;
         }
-        ArrayList<Integer> codes = new ArrayList<Integer>();
+        List<Long> codes = new ArrayList<Long>();
         codes.add(distrCode);
         DistrCodeList distrCodeList = new DistrCodeList();
         distrCodeList.setCodeList(codes);
@@ -83,7 +83,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     }
 
     private boolean putDistrCodeList(String fileCode) {
-        ArrayList<Integer> codes = new ArrayList<Integer>();
+        List<Long> codes = new ArrayList<Long>();
         codes.add(commonModule.genDistrCode());
         DistrCodeList distrCodeList = new DistrCodeList();
         distrCodeList.setCodeList(codes);
@@ -103,8 +103,8 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     }
 
     private MdAttrPos getMdAttrPos(DirMdIndex parentDir, String fileCode) {
-        List<Integer> distrCodeList = parentDir.getDistrCodeList().getCodeList();
-        int distrCode = distrCodeList.get(distrCodeList.size() - 1);
+        List<Long> distrCodeList = parentDir.getDistrCodeList().getCodeList();
+        long distrCode = distrCodeList.get(distrCodeList.size() - 1);
         boolean isFit = commonModule.checkDistrCodeFit(distrCode);
         MdAttrPos mdAttrPos = new MdAttrPos();
         ClusterNodeInfo clusterNodeInfo;
@@ -121,9 +121,10 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         return mdAttrPos;
     }
 
-    private boolean updateDistrCodeListWithNewCode(DirMdIndex parentDir, Integer newCode) {
+    private boolean updateDistrCodeListWithNewCode(DirMdIndex parentDir, long newCode) {
         String parentFileCode = parentDir.getMdIndex().getFileCode();
-        List<Integer> distrCodeList = parentDir.getDistrCodeList().getCodeList();
+
+        List<Long> distrCodeList = parentDir.getDistrCodeList().getCodeList();
         distrCodeList.add(newCode);
         DistrCodeList distrCodeList1 = parentDir.getDistrCodeList();
         distrCodeList1.setCodeList(distrCodeList);

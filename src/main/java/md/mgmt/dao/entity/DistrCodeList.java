@@ -6,20 +6,20 @@ import java.util.List;
  * Created by Mr-yang on 16-1-11.
  */
 public class DistrCodeList {
-    private List<Integer> codeList;
+    private List<Long> codeList;
 
     public DistrCodeList() {
     }
 
-    public DistrCodeList(List<Integer> codeList) {
+    public DistrCodeList(List<Long> codeList) {
         this.codeList = codeList;
     }
 
-    public List<Integer> getCodeList() {
+    public List<Long> getCodeList() {
         return codeList;
     }
 
-    public void setCodeList(List<Integer> codeList) {
+    public void setCodeList(List<Long> codeList) {
         this.codeList = codeList;
     }
 

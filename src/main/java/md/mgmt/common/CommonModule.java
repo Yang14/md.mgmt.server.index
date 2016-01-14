@@ -16,22 +16,22 @@ public interface CommonModule {
     /**
      * 生成分布编码
      */
-    public Integer genDistrCode();
+    public Long genDistrCode();
 
     /**
      * 检验分布编码对应的节点能否继续保持新的元数据
      */
-    public boolean checkDistrCodeFit(Integer distrCode);
+    public boolean checkDistrCodeFit(Long distrCode);
 
     /**
      * 获取分布编码对应的元数据节点信息
      */
-    public ClusterNodeInfo getMdLocation(Integer distrCode);
+    public ClusterNodeInfo getMdLocation(Long distrCode);
 
     /**
      * 生成分布编码对应的元数据节点信息
      */
     public ClusterNodeInfo genMdLocation();
 
-    public List<ClusterNodeInfo> getMdLocationList(List<Integer> distrCodeList);
+    public List<ClusterNodeInfo> getMdLocationList(List<Long> distrCodeList);
 }
