@@ -20,6 +20,7 @@ public class Rdb {
     private static final String DB_PATH = "/data/rocksdb/test3";
     private Options options = new Options().setCreateIfMissing(true);
     private RocksDB db_global = null;
+    private static final String RDB_DECODE = "UTF8";
 
     static {
         RocksDB.loadLibrary();
@@ -117,15 +118,15 @@ public class Rdb {
      * Every time try to open and close rdb, has spend lose of time
      */
     @Test
-    public void testCycle() {
+    public void testCyclePut() {
 
         int count = 100000;
         System.out.println("\n\n\n" + String.valueOf(System.currentTimeMillis()));
         long start = System.currentTimeMillis();
         String key = "a47486fa7be74ee08b9a7adf04afb7af";
         for (int i = 0; i < count; i++) {
-            FileMdIndex fileMdIndex = new FileMdIndex("a47486fa7be74ee08b9a7adf04afb7af", false);
-            put(key, fileMdIndex);
+            FileMdIndex fileMdIndex = new FileMdIndex(key, false);
+            put(i+"", fileMdIndex);
         }
         long end = System.currentTimeMillis();
         System.out.println(String.valueOf(System.currentTimeMillis()));
@@ -134,11 +135,47 @@ public class Rdb {
                         count, (end - start), (end - start) / (count * 1.0)));
     }
 
+    @Test
+    public void testCycleGet() {
+
+        int count = 100000;
+        System.out.println("\n\n\n" + String.valueOf(System.currentTimeMillis()));
+        long start = System.currentTimeMillis();
+        String key = "a47486fa7be74ee08b9a7adf04afb7af";
+        for (int i = 0; i < count; i++) {
+            getFileMdIndex(i+"");
+        }
+        long end = System.currentTimeMillis();
+        System.out.println(String.valueOf(System.currentTimeMillis()));
+        System.out.println(
+                String.format("\nCreate %s dir use Total time: %s ms\navg time: %sms\n\n\n",
+                        count, (end - start), (end - start) / (count * 1.0)));
+    }
+
+    private FileMdIndex getFileMdIndex(String key) {
+        Options options = new Options().setCreateIfMissing(true);
+        RocksDB db = null;
+        try {
+            db = RocksDB.open(options, DB_PATH);
+            byte[] indexBytes = db.get(key.getBytes(RDB_DECODE));
+            if (indexBytes != null) {
+                String indexValue = new String(indexBytes, RDB_DECODE);
+                return JSON.parseObject(indexValue, FileMdIndex.class);
+            }
+        } catch (Exception e) {
+            logger.error(String.format("[ERROR] caught the unexpceted exception -- %s\n", e));
+        } finally {
+            if (db != null) db.close();
+            options.dispose();
+        }
+        return null;
+    }
+
     private boolean put(String key, Object obj) {
 //        Options options = new Options().setCreateIfMissing(true);
 //        RocksDB db = null;
         try {
-            db_global.put(key.getBytes(), JSON.toJSONString(obj).getBytes());
+            db_global.put(key.getBytes(), JSON.toJSONString(obj).getBytes(RDB_DECODE));
             return true;
         } catch (Exception e) {
             logger.error(String.format("[ERROR] caught the unexpceted exception -- %s\n", e));

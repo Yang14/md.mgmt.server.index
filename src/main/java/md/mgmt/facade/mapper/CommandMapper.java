@@ -92,7 +92,7 @@ public class CommandMapper {
         RespDto respDto = new RespDto();
         respDto.setSuccess(success);
         respDto.setMsg(msg);
-        respDto.setObj(JSON.toJSONString(objStr));
+        respDto.setObjStr(JSON.toJSONString(objStr));
         return JSON.toJSONString(respDto);
     }
 
