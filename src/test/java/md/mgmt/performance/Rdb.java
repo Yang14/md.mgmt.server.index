@@ -125,8 +125,8 @@ public class Rdb {
         long start = System.currentTimeMillis();
         String key = "a47486fa7be74ee08b9a7adf04afb7af";
         for (int i = 0; i < count; i++) {
-            FileMdIndex fileMdIndex = new FileMdIndex(key, false);
-            put(i+"", fileMdIndex);
+            FileMdIndex fileMdIndex = new FileMdIndex(key +"--" + i, false);
+            put(i + "", fileMdIndex);
         }
         long end = System.currentTimeMillis();
         System.out.println(String.valueOf(System.currentTimeMillis()));
@@ -141,32 +141,28 @@ public class Rdb {
         int count = 100000;
         System.out.println("\n\n\n" + String.valueOf(System.currentTimeMillis()));
         long start = System.currentTimeMillis();
-        String key = "a47486fa7be74ee08b9a7adf04afb7af";
         for (int i = 0; i < count; i++) {
-            getFileMdIndex(i+"");
+            getFileMdIndex(i + "");
         }
         long end = System.currentTimeMillis();
         System.out.println(String.valueOf(System.currentTimeMillis()));
         System.out.println(
                 String.format("\nCreate %s dir use Total time: %s ms\navg time: %sms\n\n\n",
                         count, (end - start), (end - start) / (count * 1.0)));
+        for (int i = 10; i < 20; i++) {
+            System.out.println(getFileMdIndex(i + ""));
+        }
     }
 
     private FileMdIndex getFileMdIndex(String key) {
-        Options options = new Options().setCreateIfMissing(true);
-        RocksDB db = null;
         try {
-            db = RocksDB.open(options, DB_PATH);
-            byte[] indexBytes = db.get(key.getBytes(RDB_DECODE));
+            byte[] indexBytes = db_global.get(key.getBytes(RDB_DECODE));
             if (indexBytes != null) {
                 String indexValue = new String(indexBytes, RDB_DECODE);
                 return JSON.parseObject(indexValue, FileMdIndex.class);
             }
         } catch (Exception e) {
             logger.error(String.format("[ERROR] caught the unexpceted exception -- %s\n", e));
-        } finally {
-            if (db != null) db.close();
-            options.dispose();
         }
         return null;
     }
