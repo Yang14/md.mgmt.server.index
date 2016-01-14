@@ -10,6 +10,8 @@ import md.mgmt.facade.resp.find.FileMdAttrPosList;
 import md.mgmt.facade.resp.index.MdAttrPos;
 import md.mgmt.service.CreateMdIndexService;
 import md.mgmt.service.FindMdIndexService;
+import md.mgmt.service.impl.CreateMdIndexServiceImpl;
+import md.mgmt.service.impl.FindMdIndexServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,10 @@ public class CommandMapper {
     private Logger logger = LoggerFactory.getLogger(CommandMapper.class);
 
     @Autowired
-    private CreateMdIndexService createMdIndexService;
+    private CreateMdIndexService createMdIndexService = new CreateMdIndexServiceImpl();
 
     @Autowired
-    private FindMdIndexService findMdIndexService;
+    private FindMdIndexService findMdIndexService = new FindMdIndexServiceImpl();
 
     /**
      * 按客户端命令选择对应的服务
@@ -52,6 +54,7 @@ public class CommandMapper {
     private String createFileMdIndex(String opsContent) {
         MdIndex mdIndex = JSON.parseObject(opsContent, MdIndex.class);
         MdAttrPos mdAttrPos = createMdIndexService.createFileMdIndex(mdIndex);
+        logger.info(mdAttrPos.toString());
         if (mdAttrPos == null) {
             return getRespStr(false, "创建文件索引失败", null);
         }
@@ -89,7 +92,7 @@ public class CommandMapper {
         RespDto respDto = new RespDto();
         respDto.setSuccess(success);
         respDto.setMsg(msg);
-        respDto.setObj(objStr);
+        respDto.setObj(JSON.toJSONString(objStr));
         return JSON.toJSONString(respDto);
     }
 

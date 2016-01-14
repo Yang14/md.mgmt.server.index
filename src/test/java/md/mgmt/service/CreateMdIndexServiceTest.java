@@ -1,6 +1,7 @@
 package md.mgmt.service;
 
 import md.mgmt.base.md.MdIndex;
+import md.mgmt.facade.IndexServer;
 import md.mgmt.facade.resp.find.DirMdAttrPosList;
 import md.mgmt.facade.resp.find.FileMdAttrPosList;
 import md.mgmt.facade.resp.index.MdAttrPos;
@@ -36,6 +37,10 @@ public class CreateMdIndexServiceTest {
         }
     }
 
+    @Test
+    public void startServer() throws InterruptedException {
+        new IndexServer().run();
+    }
     private void insertDir(String path, String name) {
         createMdIndexService.createDirMdIndex(new MdIndex(path, name));
     }

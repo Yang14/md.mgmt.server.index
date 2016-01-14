@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * Created by Mr-yang on 16-1-12.
  */
 @Component
-class IndexFindRdbDaoImpl implements IndexFindRdbDao {
+public class IndexFindRdbDaoImpl implements IndexFindRdbDao {
     private Logger logger = LoggerFactory.getLogger(IndexRdbDaoImpl.class);
 
     static {

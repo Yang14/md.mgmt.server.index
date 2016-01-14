@@ -22,26 +22,33 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import md.mgmt.facade.mapper.CommandMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 /**
  * Handles both client-side and server-side handler depending on which
  * constructor was called.
  */
+@Component
 public class IndexServerHandler extends ChannelInboundHandlerAdapter {
     private Logger logger = LoggerFactory.getLogger(IndexServerHandler.class);
 
+    @Autowired
     private CommandMapper commandMapper = new CommandMapper();
 
-    @Override
+    /*@Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ApplicationContext context =
-                new ClassPathXmlApplicationContext("Beans.xml");
-    }
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        context.getBean("commandMapper");
+    }*/
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         logger.info(String.valueOf(msg));
-        String respStr = commandMapper.selectService((String)msg);
+        String respStr = commandMapper.selectService((String) msg);
+        logger.info("resp:" + respStr);
         ChannelFuture f = ctx.writeAndFlush(respStr);
         f.addListener(ChannelFutureListener.CLOSE);
     }
