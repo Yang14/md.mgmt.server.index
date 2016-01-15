@@ -72,7 +72,12 @@ public class IndexFindRdbDaoImpl implements IndexFindRdbDao {
 
     @Override
     public DirMdIndex getDirMd(MdIndex mdIndex) {
-        String newPath = mdIndex.getPath() + "/" + mdIndex.getName();
+        String newPath;
+        if (mdIndex.getPath().equals("/")) {
+            newPath = mdIndex.getPath() + mdIndex.getName();
+        } else {
+            newPath = mdIndex.getPath() + "/" + mdIndex.getName();
+        }
         return getParentDirMdIndexByPath(newPath);
     }
 
