@@ -1,7 +1,6 @@
 package md.mgmt.service;
 
-import md.mgmt.base.md.MdIndex;
-import md.mgmt.facade.resp.find.DirMdAttrPosList;
+import md.mgmt.base.ops.RenamedMd;
 import md.mgmt.facade.resp.find.FileMdAttrPosList;
 
 /**
@@ -10,12 +9,13 @@ import md.mgmt.facade.resp.find.FileMdAttrPosList;
 public interface RenameMdIndexService {
 
     /**
-     * 1.获取父目录索引
-     * 2.获取文件索引
-     * 3.组合成文件存在的范围编码
-     * 4.公共模块得到所有节点地址
+     * 重命名文件索引
+     * 目录和文件不作区分
+     * 1.获取文件索引
+     * 2.更新文件索引的键
+     * 3.为新键插入老值
+     * 4.获取文件的父目录的分布编码
+     * 5.返回文件元数据属性分布位置
      */
-    public FileMdAttrPosList findFileMdIndex(MdIndex mdIndex);
-
-    public DirMdAttrPosList findDirMdIndex(MdIndex mdIndex);
+    public FileMdAttrPosList renameMdIndex(RenamedMd renamedMd);
 }

@@ -49,9 +49,7 @@ public class IndexFindRdbDaoImpl implements IndexFindRdbDao {
     }
 
     @Override
-    public FileMdIndex getFileMd(MdIndex mdIndex) {
-        String path = mdIndex.getPath();
-        String name = mdIndex.getName();
+    public FileMdIndex getFileMd(String path,String name) {
         if (path == null || path.equals("") || path.charAt(0) != '/') {
             logger.error("findParentDirCodeByPath params err: " + path);
             return null;

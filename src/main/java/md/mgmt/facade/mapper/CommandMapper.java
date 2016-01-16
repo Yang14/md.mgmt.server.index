@@ -3,6 +3,7 @@ package md.mgmt.facade.mapper;
 import com.alibaba.fastjson.JSON;
 import md.mgmt.base.constant.OpsTypeEnum;
 import md.mgmt.base.md.MdIndex;
+import md.mgmt.base.ops.RenamedMd;
 import md.mgmt.base.ops.ReqDto;
 import md.mgmt.base.ops.RespDto;
 import md.mgmt.facade.resp.find.DirMdAttrPosList;
@@ -10,8 +11,7 @@ import md.mgmt.facade.resp.find.FileMdAttrPosList;
 import md.mgmt.facade.resp.index.MdAttrPos;
 import md.mgmt.service.CreateMdIndexService;
 import md.mgmt.service.FindMdIndexService;
-import md.mgmt.service.impl.CreateMdIndexServiceImpl;
-import md.mgmt.service.impl.FindMdIndexServiceImpl;
+import md.mgmt.service.RenameMdIndexService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +25,13 @@ public class CommandMapper {
     private Logger logger = LoggerFactory.getLogger(CommandMapper.class);
 
     @Autowired
-    private CreateMdIndexService createMdIndexService = new CreateMdIndexServiceImpl();
+    private CreateMdIndexService createMdIndexService;
 
     @Autowired
-    private FindMdIndexService findMdIndexService = new FindMdIndexServiceImpl();
+    private FindMdIndexService findMdIndexService;
+
+    @Autowired
+    private RenameMdIndexService renameMdIndexService;
 
     /**
      * 按客户端命令选择对应的服务
@@ -47,8 +50,19 @@ public class CommandMapper {
             return findFileMdIndex(opsContent);
         } else if (reqDto.getOpsType() == OpsTypeEnum.LIST_DIR.getCode()) {
             return findDirMdIndex(opsContent);
+        } else if (reqDto.getOpsType() == OpsTypeEnum.RENAME_FILE.getCode()) {
+            return renameMdIndex(opsContent);
         }
         return getRespStr(false, "参数错误", null);
+    }
+
+    private String renameMdIndex(String opsContent) {
+        RenamedMd renamedMd = JSON.parseObject(opsContent, RenamedMd.class);
+        FileMdAttrPosList fileMdIndex = renameMdIndexService.renameMdIndex(renamedMd);
+        if (fileMdIndex == null) {
+            return getRespStr(false, "重命名索引失败", null);
+        }
+        return getRespStr(true, "重命名索引成功", fileMdIndex);
     }
 
     private String createFileMdIndex(String opsContent) {

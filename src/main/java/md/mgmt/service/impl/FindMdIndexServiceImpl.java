@@ -38,7 +38,7 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
         logger.info(distrCodeList.toString());
         List<ClusterNodeInfo> clusterNodeInfos = commonModule.getMdLocationList(distrCodeList.getCodeList());
         fileMdAttrPosList.setClusterNodeInfos(clusterNodeInfos);
-        FileMdIndex fileMdIndex = indexFindRdbDao.getFileMd(mdIndex);
+        FileMdIndex fileMdIndex = indexFindRdbDao.getFileMd(mdIndex.getPath(), mdIndex.getName());
         fileMdAttrPosList.setFileCode(fileMdIndex.getFileCode());
         return fileMdAttrPosList;
     }
