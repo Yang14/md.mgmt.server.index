@@ -54,6 +54,10 @@ public class IndexFindRdbDaoImpl implements IndexFindRdbDao {
             logger.error("findParentDirCodeByPath params err: " + path);
             return null;
         }
+        if (path.equals("/")) {
+            String key = JSON.toJSONString(new MdIndexKey("0", name));
+            return getFileMdIndex(key);
+        }
         String[] nodes = path.split("/");
         nodes[0] = "/";
         String code = "0";

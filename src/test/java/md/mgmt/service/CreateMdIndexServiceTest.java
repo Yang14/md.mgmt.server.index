@@ -90,7 +90,7 @@ public class CreateMdIndexServiceTest {
 
     @Test
     public void testCreateFileMdIndex() {
-        MdAttrPos mdAttrPos = createMdIndexService.createFileMdIndex(new MdIndex("/bin", "a"));
+        MdAttrPos mdAttrPos = createMdIndexService.createFileMdIndex(new MdIndex("/", "root1"));
         if (mdAttrPos == null) {
             logger.info("创建失败！");
         } else {
@@ -106,8 +106,8 @@ public class CreateMdIndexServiceTest {
 
     @Test
     public void testFindFileMdIndex() {
-        String path = "/bin/foo";
-        String name = "a1";
+        String path = "/";
+        String name = "root1";
         FileMdAttrPosList fileMdAttrPosList = findMdIndexService.findFileMdIndex(new MdIndex(path, name));
         logger.info(fileMdAttrPosList.toString());
     }
@@ -129,7 +129,7 @@ public class CreateMdIndexServiceTest {
 
         renameMdIndexService.renameMdIndex(new RenamedMd("/", "etc", "etc2"));
         logger.info(findMdIndexService.findDirMdIndex(new MdIndex("/", "etc2")).toString());
-        renameMdIndexService.renameMdIndex(new RenamedMd("/etc", "a.t","a2.txt"));
-        logger.info(findMdIndexService.findFileMdIndex(new MdIndex("/etc", "a2.t")).toString());
+        renameMdIndexService.renameMdIndex(new RenamedMd("/etc2", "a.t","a2.txt"));
+        logger.info(findMdIndexService.findFileMdIndex(new MdIndex("/etc2", "a2.txt")).toString());
     }
 }

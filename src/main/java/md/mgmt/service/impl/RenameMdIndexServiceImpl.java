@@ -39,6 +39,9 @@ public class RenameMdIndexServiceImpl implements RenameMdIndexService {
     public FileMdAttrPosList renameMdIndex(RenamedMd renamedMd) {
         FileMdAttrPosList fileMdAttrPosList = new FileMdAttrPosList();
         DirMdIndex dirMdIndex = indexFindRdbDao.getParentDirMdIndexByPath(renamedMd.getPath());
+        if (dirMdIndex == null){
+            return null;
+        }
         DistrCodeList distrCodeList = dirMdIndex.getDistrCodeList();
         logger.info(distrCodeList.toString());
         List<ClusterNodeInfo> clusterNodeInfos = commonModule.getMdLocationList(distrCodeList.getCodeList());
