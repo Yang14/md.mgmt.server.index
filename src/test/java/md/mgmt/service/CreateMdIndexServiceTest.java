@@ -1,6 +1,7 @@
 package md.mgmt.service;
 
 import md.mgmt.base.md.MdIndex;
+import md.mgmt.base.ops.RenamedMd;
 import md.mgmt.facade.IndexServer;
 import md.mgmt.facade.resp.find.DirMdAttrPosList;
 import md.mgmt.facade.resp.find.FileMdAttrPosList;
@@ -27,6 +28,9 @@ public class CreateMdIndexServiceTest {
 
     @Autowired
     private FindMdIndexService findMdIndexService;
+
+    @Autowired
+    private RenameMdIndexService renameMdIndexService;
 
     @Before
     public void setUp() {
@@ -114,5 +118,18 @@ public class CreateMdIndexServiceTest {
         String name = "foo2";
         DirMdAttrPosList dirMdAttrPosList = findMdIndexService.findDirMdIndex(new MdIndex(path, name));
         logger.info(dirMdAttrPosList.toString());
+    }
+
+    @Test
+    public void testRenameMdIndex(){
+        createMdIndexService.createDirMdIndex(new MdIndex("/","etc"));
+        logger.info(findMdIndexService.findDirMdIndex(new MdIndex("/", "etc")).toString());
+        createMdIndexService.createFileMdIndex(new MdIndex("/etc", "a.t"));
+        logger.info(findMdIndexService.findFileMdIndex(new MdIndex("/etc", "a.t")).toString());
+
+        renameMdIndexService.renameMdIndex(new RenamedMd("/", "etc", "etc2"));
+        logger.info(findMdIndexService.findDirMdIndex(new MdIndex("/", "etc2")).toString());
+        renameMdIndexService.renameMdIndex(new RenamedMd("/etc", "a.t","a2.txt"));
+        logger.info(findMdIndexService.findFileMdIndex(new MdIndex("/etc", "a2.t")).toString());
     }
 }

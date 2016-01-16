@@ -2,7 +2,6 @@ package md.mgmt.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import md.mgmt.base.md.ClusterNodeInfo;
-import md.mgmt.base.md.MdIndex;
 import md.mgmt.base.ops.RenamedMd;
 import md.mgmt.common.CommonModule;
 import md.mgmt.dao.IndexFindRdbDao;
