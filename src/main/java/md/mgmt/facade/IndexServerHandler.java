@@ -42,8 +42,12 @@ public class IndexServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         logger.info(String.valueOf(msg));
+        long start = System.currentTimeMillis();
         String respStr = commandMapper.selectService((String) msg);
         logger.info("resp:" + respStr);
+        long end = System.currentTimeMillis();
+        logger.info("resp:" + respStr);
+        logger.info("time spend: " + (end - start));
         ChannelFuture f = ctx.writeAndFlush(respStr);
         f.addListener(ChannelFutureListener.CLOSE);
     }
