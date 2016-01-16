@@ -127,9 +127,9 @@ public class CreateMdIndexServiceTest {
         createMdIndexService.createFileMdIndex(new MdIndex("/etc", "a.t"));
         logger.info(findMdIndexService.findFileMdIndex(new MdIndex("/etc", "a.t")).toString());
 
-        renameMdIndexService.renameMdIndex(new RenamedMd("/", "etc", "etc2"));
-        logger.info(findMdIndexService.findDirMdIndex(new MdIndex("/", "etc2")).toString());
-        renameMdIndexService.renameMdIndex(new RenamedMd("/etc2", "a.t","a2.txt"));
-        logger.info(findMdIndexService.findFileMdIndex(new MdIndex("/etc2", "a2.txt")).toString());
+        logger.info(renameMdIndexService.renameMdIndex(new RenamedMd("/", "etc", "etc2")).toString());
+        logger.info(renameMdIndexService.renameMdIndex(new RenamedMd("/etc2", "a.t","a2.txt")).toString());
+
+        logger.info(findMdIndexService.findFileMdIndex(new MdIndex("/", "bin2")).toString());
     }
 }

@@ -44,7 +44,6 @@ public class IndexServerHandler extends ChannelInboundHandlerAdapter {
         logger.info(String.valueOf(msg));
         long start = System.currentTimeMillis();
         String respStr = commandMapper.selectService((String) msg);
-        logger.info("resp:" + respStr);
         long end = System.currentTimeMillis();
         logger.info("resp:" + respStr);
         logger.info("time spend: " + (end - start));
