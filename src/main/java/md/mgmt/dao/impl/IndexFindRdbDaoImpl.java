@@ -6,6 +6,7 @@ import md.mgmt.dao.IndexFindRdbDao;
 import md.mgmt.dao.entity.*;
 import org.rocksdb.Options;
 import org.rocksdb.RocksDB;
+import org.rocksdb.RocksDBException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -15,14 +16,21 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class IndexFindRdbDaoImpl implements IndexFindRdbDao {
-    private Logger logger = LoggerFactory.getLogger(IndexRdbDaoImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(IndexRdbDaoImpl.class);
+
+    private static final String DB_PATH = "/data/backend";
+    private static Options options = new Options().setCreateIfMissing(true);
+    private static RocksDB db = null;
+    private static final String RDB_DECODE = "UTF8";
 
     static {
         RocksDB.loadLibrary();
+        try {
+            db = RocksDB.open(options, DB_PATH);
+        } catch (RocksDBException e) {
+            logger.error(e.getMessage());
+        }
     }
-
-    private static final String DB_PATH = "/data/rdb/mdIndex";
-    private static final String RDB_DECODE = "UTF8";
 
     @Override
     public DirMdIndex getParentDirMdIndexByPath(String path) {
