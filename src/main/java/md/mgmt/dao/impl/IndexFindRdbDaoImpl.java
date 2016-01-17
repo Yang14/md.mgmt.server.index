@@ -15,22 +15,9 @@ import org.springframework.stereotype.Component;
  * Created by Mr-yang on 16-1-12.
  */
 @Component
-public class IndexFindRdbDaoImpl implements IndexFindRdbDao {
+public class IndexFindRdbDaoImpl extends BaseRdb implements IndexFindRdbDao {
     private static Logger logger = LoggerFactory.getLogger(IndexRdbDaoImpl.class);
 
-    private static final String DB_PATH = "/data/rdb/mdIndex";
-    private static Options options = new Options().setCreateIfMissing(true);
-    private static RocksDB db = null;
-    private static final String RDB_DECODE = "UTF8";
-
-    static {
-        RocksDB.loadLibrary();
-        try {
-            db = RocksDB.open(options, DB_PATH);
-        } catch (RocksDBException e) {
-            logger.error(e.getMessage());
-        }
-    }
 
     @Override
     public DirMdIndex getParentDirMdIndexByPath(String path) {

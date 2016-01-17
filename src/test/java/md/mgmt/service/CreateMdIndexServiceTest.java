@@ -54,10 +54,9 @@ public class CreateMdIndexServiceTest {
      */
     @Test
     public void testBatchCreateDirTime() {
-        String path1 = "/bin/foo";
-        String path2 = "/bin/foo2";
+        String path1 = "/home/";
         String namePrefix = "tst-";
-        int count = 4;
+        int count = 10000;
         logger.info(String.valueOf(System.currentTimeMillis()));
         long start = System.currentTimeMillis();
         for (int i = 0; i < count; i++) {
@@ -66,27 +65,17 @@ public class CreateMdIndexServiceTest {
         long end = System.currentTimeMillis();
         logger.info(String.valueOf(System.currentTimeMillis()));
         logger.info(String.format("\nCreate 10000 dir use Total time: %s ms\navg time: %ss",
-                (end - start), (end - start) / (count * 1000.0)));
+                (end - start), (end - start) / (count * 1.0)));
     }
 
     @Test
     public void testCreateDirMdIndex() {
-        long start = System.currentTimeMillis();
-        MdAttrPos mdAttrPos = createMdIndexService.createDirMdIndex(new MdIndex("/", "bin"));
-        logger.info(mdAttrPos.toString());
-        mdAttrPos = createMdIndexService.createDirMdIndex(new MdIndex("/bin", "foo"));
-        logger.info(mdAttrPos.toString());
-        mdAttrPos = createMdIndexService.createDirMdIndex(new MdIndex("/bin", "foo2"));
-        logger.info(mdAttrPos.toString());
-        mdAttrPos = createMdIndexService.createDirMdIndex(new MdIndex("/bin", "foo3"));
-        logger.info(mdAttrPos.toString());
-        mdAttrPos = createMdIndexService.createDirMdIndex(new MdIndex("/", "etc"));
-        logger.info(mdAttrPos.toString());
-        long end = System.currentTimeMillis();
-        logger.info(String.format("\nCreate 10000 dir use Total time: %s\navg time: %s",
-                (end - start), (end - start) / (5 * 1.0)));
-
+        createMdIndexService.createDirMdIndex(new MdIndex("/","home"));
+        createMdIndexService.createDirMdIndex(new MdIndex("/home","a"));
+        createMdIndexService.createDirMdIndex(new MdIndex("/home/a","b"));
+        createMdIndexService.createDirMdIndex(new MdIndex("/home/a/b","c"));
     }
+
 
     @Test
     public void testCreateFileMdIndex() {
@@ -114,8 +103,8 @@ public class CreateMdIndexServiceTest {
 
     @Test
     public void testFindDirMdIndex() {
-        String path = "/bin";
-        String name = "foo2";
+        String path = "/home/a/b";
+        String name = "c";
         DirMdAttrPosList dirMdAttrPosList = findMdIndexService.findDirMdIndex(new MdIndex(path, name));
         logger.info(dirMdAttrPosList.toString());
     }
