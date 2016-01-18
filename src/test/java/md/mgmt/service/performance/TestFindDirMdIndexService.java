@@ -26,7 +26,7 @@ public class TestFindDirMdIndexService extends BasePerformanceTest{
     public long execMethod(int hotCount, int count) {
         String dirName = "tstDir-";
         for (int i = 1; i < hotCount; i++) {
-            findMdIndexService.findFileMdIndex(new MdIndex("/", dirName + i));
+            findMdIndexService.findDirMdIndex(new MdIndex("/", dirName + i));
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {

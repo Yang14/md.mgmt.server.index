@@ -26,11 +26,11 @@ public class TestCreateDirMdIndexService extends BasePerformanceTest {
     public long execMethod(int hotCount, int count) {
         String dirName = "tstDir-";
         for (int i = 1; i < hotCount; i++) {
-            createMdIndexService.createFileMdIndex(new MdIndex("/", dirName + i));
+            createMdIndexService.createDirMdIndex(new MdIndex("/", dirName + i));
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            createMdIndexService.createFileMdIndex(new MdIndex("/", dirName + i));
+            createMdIndexService.createDirMdIndex(new MdIndex("/", dirName + i));
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count: %s  use Total time: %s ms, avg time: %sms",
