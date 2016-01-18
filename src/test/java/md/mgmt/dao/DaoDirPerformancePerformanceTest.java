@@ -18,8 +18,8 @@ import java.util.List;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring.xml")
-public class RdbDaoTest {
-    private Logger logger = LoggerFactory.getLogger(RdbDaoTest.class);
+public class DaoDirPerformancePerformanceTest  {
+    private Logger logger = LoggerFactory.getLogger(DaoDirPerformancePerformanceTest.class);
 
     @Autowired
     private IndexRdbDao indexRdbDao;
@@ -28,22 +28,6 @@ public class RdbDaoTest {
     private IndexFindRdbDao indexFindRdbDao;
 
 
-    @Test
-    public void testPutFileMdIndex() {
-        for (int i = 1; i < 100000; i++) {
-            indexRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
-        }
-        int count = 10000;
-        logger.info(String.valueOf(System.currentTimeMillis()));
-        long start = System.currentTimeMillis();
-        for (int i = 1; i < count; i++) {
-            indexRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
-        }
-        long end = System.currentTimeMillis();
-        logger.info(String.valueOf(System.currentTimeMillis()));
-        logger.info(String.format("\ntestPutFileMdIndex %s  use Total time: %s ms\navg time: %ss",
-                count, (end - start), (end - start) / (count * 1.0)));
-    }
 
     @Test
     public void testGetFileMdIndex() {

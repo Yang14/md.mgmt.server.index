@@ -1,5 +1,6 @@
 package md.mgmt.service;
 
+import md.mgmt.BasePerformanceTest;
 import md.mgmt.base.md.MdIndex;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring.xml")
-public class ServicePerformanceTest {
-    private Logger logger = LoggerFactory.getLogger(ServicePerformanceTest.class);
+public class ServicePerformancePerformanceTest extends BasePerformanceTest {
+    private Logger logger = LoggerFactory.getLogger(ServicePerformancePerformanceTest.class);
 
     @Autowired
     private CreateMdIndexService createMdIndexService;
@@ -35,13 +36,13 @@ public class ServicePerformanceTest {
     }
 
     @Test
-    public void testAutoCreateFileMdIndex() {
-        int[] cycles = new int[]{10,5,3};
-        int hotCount = 10000;
-        int[] counts = new int[]{10000,10000*10,10000*100};
+    public void testAutoCreateFileMdIndexPerformance() {
+        logger.info("------------------------------------------");
+        logger.info("start testing service create File MdIndex");
         for (int i=0;i<cycles.length;++i){
-            testCreateFileMdIndex(cycles[i],hotCount,counts[i]);
+            testCreateFileMdIndex(cycles[i], hotCount, counts[i]);
         }
+        logger.info("-------------------end--------------------");
     }
 
     private void testCreateFileMdIndex(int cycle,int hotCount, int count) {
