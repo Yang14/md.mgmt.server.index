@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 public class Rdb {
     private Logger logger = LoggerFactory.getLogger(Rdb.class);
 
-    private static final String DB_PATH = "/data/rocksdb/test3";
+    private static final String DB_PATH = "/data/rocksdb/test4";
     private Options options = new Options().setCreateIfMissing(true);
     private RocksDB db_global = null;
     private static final String RDB_DECODE = "UTF8";
@@ -102,8 +102,8 @@ public class Rdb {
                         (JSON.toJSONString(new FileMdIndex("a47486fa7be74ee08b9a7adf04afb7af", false))).getBytes());
             }
             long end = System.currentTimeMillis();
-            System.out.println(String.valueOf(System.currentTimeMillis()));
-            System.out.println(
+            logger.info(String.valueOf(System.currentTimeMillis()));
+            logger.info(
                     String.format("\nCreate %s dir use Total time: %s ms\navg time: %sms\n\n\n",
                             count, (end - start), (end - start) / (count * 1.0)));
         } catch (Exception e) {
@@ -120,8 +120,8 @@ public class Rdb {
     @Test
     public void testCyclePut() {
 
-        int count = 100000;
-        System.out.println("\n\n\n" + String.valueOf(System.currentTimeMillis()));
+        int count = 10000 * 100;
+        logger.info("\n\n\n" + String.valueOf(System.currentTimeMillis()));
         long start = System.currentTimeMillis();
         String key = "a47486fa7be74ee08b9a7adf04afb7af";
         for (int i = 0; i < count; i++) {
@@ -129,8 +129,8 @@ public class Rdb {
             put(i + "", fileMdIndex);
         }
         long end = System.currentTimeMillis();
-        System.out.println(String.valueOf(System.currentTimeMillis()));
-        System.out.println(
+        logger.info(String.valueOf(System.currentTimeMillis()));
+        logger.info(
                 String.format("\nCreate %s dir use Total time: %s ms\navg time: %sms\n\n\n",
                         count, (end - start), (end - start) / (count * 1.0)));
     }
@@ -138,27 +138,24 @@ public class Rdb {
     @Test
     public void testCycleGet() {
 
-        int count = 100000;
-        System.out.println("\n\n\n" + String.valueOf(System.currentTimeMillis()));
+        int count = 10000 ;
+        logger.info("\n\n\n" + String.valueOf(System.currentTimeMillis()));
         long start = System.currentTimeMillis();
         for (int i = 0; i < count; i++) {
             getFileMdIndex(i + "");
         }
         long end = System.currentTimeMillis();
-        System.out.println(String.valueOf(System.currentTimeMillis()));
-        System.out.println(
-                String.format("\nCreate %s dir use Total time: %s ms\navg time: %sms\n\n\n",
+        logger.info(String.valueOf(System.currentTimeMillis()));
+        logger.info(
+                String.format("\nGet %s dir use Total time: %s ms\navg time: %sms\n\n\n",
                         count, (end - start), (end - start) / (count * 1.0)));
-        for (int i = 10; i < 20; i++) {
-            System.out.println(getFileMdIndex(i + ""));
-        }
     }
 
     private FileMdIndex getFileMdIndex(String key) {
         try {
-            byte[] indexBytes = db_global.get(key.getBytes(RDB_DECODE));
+            byte[] indexBytes = db_global.get(key.getBytes());
             if (indexBytes != null) {
-                String indexValue = new String(indexBytes, RDB_DECODE);
+                String indexValue = new String(indexBytes);
                 return JSON.parseObject(indexValue, FileMdIndex.class);
             }
         } catch (Exception e) {

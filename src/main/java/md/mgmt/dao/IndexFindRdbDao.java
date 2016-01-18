@@ -17,4 +17,8 @@ public interface IndexFindRdbDao {
     public FileMdIndex getFileMd(String path,String name);
 
     public DirMdIndex getDirMd(MdIndex mdIndex);
+//-----------------------------------------
+    public FileMdIndex getFileMdIndex(String key);
+
+    public DirMdIndex getDirMdIndex(String key);
 }

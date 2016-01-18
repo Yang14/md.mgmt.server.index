@@ -1,6 +1,5 @@
 package md.mgmt.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.base.ops.RenamedMd;
 import md.mgmt.common.CommonModule;
@@ -9,8 +8,8 @@ import md.mgmt.dao.IndexRdbDao;
 import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
-import md.mgmt.dao.entity.MdIndexKey;
 import md.mgmt.facade.resp.find.FileMdAttrPosList;
+import md.mgmt.service.MdUtils;
 import md.mgmt.service.RenameMdIndexService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,12 +54,12 @@ public class RenameMdIndexServiceImpl implements RenameMdIndexService {
 
     private boolean renameFileMdIndex(String parentCode, RenamedMd renamedMd, FileMdIndex fileMdIndex) {
         removeFileMdIndex(parentCode,renamedMd.getName());
-        String key = JSON.toJSONString(new MdIndexKey(parentCode, renamedMd.getNewName()));
+        String key = MdUtils.genMdIndexKey(parentCode, renamedMd.getNewName());
         return indexRdbDao.putFileMdIndex(key, fileMdIndex);
     }
 
     private void removeFileMdIndex(String parentCode, String name) {
-        String key = JSON.toJSONString(new MdIndexKey(parentCode, name));
+        String key = MdUtils.genMdIndexKey(parentCode, name);
         indexRdbDao.removeFileMdIndex(key);
     }
 }

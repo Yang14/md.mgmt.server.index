@@ -35,7 +35,6 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
         FileMdAttrPosList fileMdAttrPosList = new FileMdAttrPosList();
         DirMdIndex dirMdIndex = indexFindRdbDao.getParentDirMdIndexByPath(mdIndex.getPath());
         DistrCodeList distrCodeList = dirMdIndex.getDistrCodeList();
-        logger.info(distrCodeList.toString());
         List<ClusterNodeInfo> clusterNodeInfos = commonModule.getMdLocationList(distrCodeList.getCodeList());
         fileMdAttrPosList.setClusterNodeInfos(clusterNodeInfos);
         FileMdIndex fileMdIndex = indexFindRdbDao.getFileMd(mdIndex.getPath(), mdIndex.getName());
@@ -47,7 +46,6 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
     public DirMdAttrPosList findDirMdIndex(MdIndex mdIndex) {
         DirMdIndex dirMdIndex = indexFindRdbDao.getDirMd(mdIndex);
         DistrCodeList distrCodeList = dirMdIndex.getDistrCodeList();
-        logger.info(distrCodeList.toString());
         List<ClusterNodeInfo> clusterNodeInfos = commonModule.getMdLocationList(distrCodeList.getCodeList());
         return new DirMdAttrPosList(clusterNodeInfos);
     }

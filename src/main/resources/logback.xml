@@ -4,7 +4,7 @@
 
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{MMdd.HHmmss.SSS} [%-24t] %-5p L:%-3L %-22c{0} - %m%n</pattern>
+            <pattern>%d{MMdd.HHmmss.SSS} [%-4t] %-5p L:%-3L %-22c{0} - %m%n</pattern>
         </encoder>
 
         <!-- 只输出level级别的日志 -->
@@ -16,9 +16,9 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>log/client.log</File>
+        <File>log/index.log</File>
         <encoder>
-            <pattern>%d{MMdd.HHmmss} [%-22t] %-5p L:%-3L %-22c{0} - %m%n</pattern>
+            <pattern>%d{MMdd.HHmmss} [%-4t] %-5p L:%-3L %-22c{0} - %m%n</pattern>
         </encoder>
 
         <!-- 只输出level级别以上的日志 -->
@@ -27,7 +27,7 @@
         </filter>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/client.log.%d{yyyyMMdd}</fileNamePattern>
+            <fileNamePattern>log/index.log.%d{yyyyMMdd}</fileNamePattern>
         </rollingPolicy>
     </appender>
 

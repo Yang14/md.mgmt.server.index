@@ -1,6 +1,5 @@
 package md.mgmt.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.base.md.ExactCode;
 import md.mgmt.base.md.MdIndex;
@@ -10,9 +9,9 @@ import md.mgmt.dao.IndexRdbDao;
 import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
-import md.mgmt.dao.entity.MdIndexKey;
 import md.mgmt.facade.resp.index.MdAttrPos;
 import md.mgmt.service.CreateMdIndexService;
+import md.mgmt.service.MdUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +41,11 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
      */
     @Override
     public boolean createRootDir() {
-        String parentCode = "0";
-        String fileCode = "0";
+        String parentCode = "-1";
+        String fileCode = "-1";
         long distrCode = 0;
         String name = "/";
-        String key = JSON.toJSONString(new MdIndexKey(parentCode, name));
+        String key = MdUtils.genMdIndexKey(parentCode, name);
         if (!indexRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, true))) {
             return false;
         }
@@ -87,7 +86,6 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         codes.add(commonModule.genDistrCode());
         DistrCodeList distrCodeList = new DistrCodeList();
         distrCodeList.setCodeList(codes);
-//        logger.info("putDistrCodeList:" + fileCode + "->" + distrCodeList);
         return indexRdbDao.putDistrCodeList(fileCode, distrCodeList);
     }
 
@@ -97,8 +95,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
      */
     private boolean putFileMdIndex(DirMdIndex parentDir, MdIndex mdIndex, String fileCode, boolean isDir) {
         String parentFileCode = parentDir.getMdIndex().getFileCode();
-        String key = JSON.toJSONString(new MdIndexKey(parentFileCode, mdIndex.getName()));
-//        logger.info("putFileMdIndex:" + key + ": fileCode-->" + fileCode);
+        String key = MdUtils.genMdIndexKey(parentFileCode, mdIndex.getName());
         return indexRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, isDir));
     }
 

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import md.mgmt.base.md.MdIndex;
 import md.mgmt.dao.IndexFindRdbDao;
 import md.mgmt.dao.entity.*;
+import md.mgmt.service.MdUtils;
 import org.rocksdb.Options;
 import org.rocksdb.RocksDB;
 import org.rocksdb.RocksDBException;
@@ -26,21 +27,19 @@ public class IndexFindRdbDaoImpl extends BaseRdb implements IndexFindRdbDao {
             return null;
         }
         if (path.equals("/")) {
-            String key = JSON.toJSONString(new MdIndexKey("0", "/"));
-            return getDirMdIndex(key);
+            return getDirMdIndex(MdUtils.genMdIndexKey("-1", "/"));
         }
         String[] nodes = path.split("/");
         nodes[0] = "/";
-        String code = "0";
+        String code = "-1";
         for (int i = 0; i < nodes.length - 1 && code != null; ++i) {
-            String key = JSON.toJSONString(new MdIndexKey(code, nodes[i]));
-            code = getFileMdIndex(key).getFileCode();
+            code = getFileMdIndex(MdUtils.genMdIndexKey(code, nodes[i])).getFileCode();
         }
         if (code == null) {   //路径不存在
             logger.error("路径不存在%s", path);
             return null;
         }
-        return getDirMdIndex(JSON.toJSONString(new MdIndexKey(code, nodes[nodes.length - 1])));
+        return getDirMdIndex(MdUtils.genMdIndexKey(code, nodes[nodes.length - 1]));
     }
 
     @Override
@@ -50,21 +49,19 @@ public class IndexFindRdbDaoImpl extends BaseRdb implements IndexFindRdbDao {
             return null;
         }
         if (path.equals("/")) {
-            String key = JSON.toJSONString(new MdIndexKey("0", name));
-            return getFileMdIndex(key);
+            return getFileMdIndex(MdUtils.genMdIndexKey("-1", name));
         }
         String[] nodes = path.split("/");
         nodes[0] = "/";
-        String code = "0";
+        String code = "-1";
         for (int i = 0; i < nodes.length && code != null; ++i) {
-            String key = JSON.toJSONString(new MdIndexKey(code, nodes[i]));
-            code = getFileMdIndex(key).getFileCode();
+            code = getFileMdIndex(MdUtils.genMdIndexKey(code, nodes[i])).getFileCode();
         }
         if (code == null) {   //路径不存在
             logger.error("路径不存在%s", path);
             return null;
         }
-        return getFileMdIndex(JSON.toJSONString(new MdIndexKey(code, name)));
+        return getFileMdIndex(MdUtils.genMdIndexKey(code, name));
     }
 
     @Override
@@ -78,17 +75,16 @@ public class IndexFindRdbDaoImpl extends BaseRdb implements IndexFindRdbDao {
         return getParentDirMdIndexByPath(newPath);
     }
 
-    private DirMdIndex getDirMdIndex(String key) {
+    public DirMdIndex getDirMdIndex(String key) {
         try {
             byte[] indexBytes = db.get(key.getBytes(RDB_DECODE));
             if (indexBytes != null) {
-                String indexValue = new String(indexBytes, RDB_DECODE);
-                FileMdIndex fileMdIndex = JSON.parseObject(indexValue, FileMdIndex.class);
+                FileMdIndex fileMdIndex = JSON.parseObject(new String(indexBytes, RDB_DECODE), FileMdIndex.class);
                 String fileCode = fileMdIndex.getFileCode();
                 byte[] distrCodeBytes = db.get(fileCode.getBytes(RDB_DECODE));
                 if (distrCodeBytes != null) {
-                    String distrCodeValue = new String(distrCodeBytes, RDB_DECODE);
-                    DistrCodeList distrCodeList = JSON.parseObject(distrCodeValue, DistrCodeList.class);
+                    DistrCodeList distrCodeList = JSON.parseObject(
+                            new String(distrCodeBytes, RDB_DECODE), DistrCodeList.class);
                     return new DirMdIndex(fileMdIndex, distrCodeList);
                 }
             }
@@ -98,12 +94,11 @@ public class IndexFindRdbDaoImpl extends BaseRdb implements IndexFindRdbDao {
         return null;
     }
 
-    private FileMdIndex getFileMdIndex(String key) {
+    public FileMdIndex getFileMdIndex(String key) {
         try {
             byte[] indexBytes = db.get(key.getBytes(RDB_DECODE));
             if (indexBytes != null) {
-                String indexValue = new String(indexBytes, RDB_DECODE);
-                return JSON.parseObject(indexValue, FileMdIndex.class);
+                return JSON.parseObject(new String(indexBytes, RDB_DECODE), FileMdIndex.class);
             }
         } catch (Exception e) {
             logger.error(String.format("[ERROR] caught the unexpected exception -- %s\n", e));

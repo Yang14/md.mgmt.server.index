@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 public class BaseRdb {
     private static Logger logger = LoggerFactory.getLogger(IndexRdbDaoImpl.class);
 
-    public static final String DB_PATH = "/data/rdb/mdIndex";
+    public static final String DB_PATH = "/data/index";
     public static Options options = new Options().setCreateIfMissing(true);
     public static RocksDB db = null;
     public static final String RDB_DECODE = "UTF8";

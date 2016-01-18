@@ -16,4 +16,7 @@ public interface IndexRdbDao {
     public boolean putDistrCodeList(String key, DistrCodeList distrCodeList);
 
     public void  removeFileMdIndex(String key);
+
+    public boolean put(String key, Object obj);
+
 }

@@ -37,7 +37,7 @@ public class IndexRdbDaoImpl extends BaseRdb implements IndexRdbDao {
         }
     }
 
-    private boolean put(String key, Object obj) {
+    public boolean put(String key, Object obj) {
         try {
             db.put(key.getBytes(RDB_DECODE), JSON.toJSONString(obj).getBytes());
             return true;
