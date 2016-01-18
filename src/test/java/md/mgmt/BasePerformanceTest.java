@@ -51,7 +51,7 @@ public abstract class BasePerformanceTest {
             }
             totalTime += time;
         }
-        logger.info(String.format("min %s, max %s, total avg time: %s\n\n",
+        logger.info(String.format("min %s, max %s, total avg time: %s",
                 min, max, totalTime / (count * cycle * 1.0)));
     }
 

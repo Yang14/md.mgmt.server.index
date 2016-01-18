@@ -10,24 +10,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Created by Mr-yang on 16-1-18.
  */
-public class DaoGetFileMdIndex extends BasePerformanceTest {
-    private static Logger logger = LoggerFactory.getLogger(DaoGetFileMdIndex.class);
-    private static String methodDesc = "testPutFileMdIndex";
+public class DaoGetDirMdIndex extends BasePerformanceTest {
+    private static Logger logger = LoggerFactory.getLogger(DaoGetDirMdIndex.class);
+    private static String methodDesc = "testGetDirMdIndex";
     @Autowired
     private IndexFindRdbDao indexFindRdbDao;
 
-    protected DaoGetFileMdIndex() {
+    protected DaoGetDirMdIndex() {
         super(logger, methodDesc);
     }
 
     @Override
     public long execMethod(int hotCount, int count) {
         for (int i = 1; i < hotCount; i++) {
-            indexFindRdbDao.getFileMdIndex("key:" + i);
+            indexFindRdbDao.getDirMdIndex("key:" + i);
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            logger.info(indexFindRdbDao.getFileMdIndex("key:" + i).toString());
+            indexFindRdbDao.getDirMdIndex("key:" + i);
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count %s  use Total time: %s ms, avg time: %sms",
@@ -36,7 +36,7 @@ public class DaoGetFileMdIndex extends BasePerformanceTest {
     }
 
     @Test
-    public void testPutFileMdIndex(){
+    public void testGetDirMdIndex(){
         moduleMethod();
     }
 }
