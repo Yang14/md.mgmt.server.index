@@ -16,7 +16,7 @@ public class DaoGetDirMdIndex extends BasePerformanceTest {
     @Autowired
     private IndexFindRdbDao indexFindRdbDao;
 
-    protected DaoGetDirMdIndex() {
+    public DaoGetDirMdIndex() {
         super(logger, methodDesc);
     }
 
