@@ -39,7 +39,7 @@ public class TestCreateDirMdIndexService extends BasePerformanceTest {
     }
 
     @Test
-    public void testCreateFileMdIndex() {
+    public void testCreateDirMdIndex() {
         moduleMethod();
     }
 }

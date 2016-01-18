@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class TestFindDirMdIndexService extends BasePerformanceTest{
     private static Logger logger = LoggerFactory.getLogger(TestFindDirMdIndexService.class);
-    private static String methodDesc = "testFindFileMdIndex";
+    private static String methodDesc = "testFindDirMdIndex";
 
     @Autowired
     private FindMdIndexService findMdIndexService;
@@ -24,12 +24,13 @@ public class TestFindDirMdIndexService extends BasePerformanceTest{
 
     @Override
     public long execMethod(int hotCount, int count) {
+        String dirName = "tstDir-";
         for (int i = 1; i < hotCount; i++) {
-            findMdIndexService.findFileMdIndex(new MdIndex("/", "testFile" + i));
+            findMdIndexService.findFileMdIndex(new MdIndex("/", dirName + i));
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            findMdIndexService.findFileMdIndex(new MdIndex("/", "testFile" + i));
+            findMdIndexService.findDirMdIndex(new MdIndex("/", dirName + i));
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count: %s  use Total time: %s ms, avg time: %sms",
@@ -38,7 +39,7 @@ public class TestFindDirMdIndexService extends BasePerformanceTest{
     }
 
     @Test
-    public void testFindFileMdIndex(){
+    public void testFindDirMdIndex(){
         moduleMethod();
     }
 }
