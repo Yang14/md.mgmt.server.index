@@ -14,12 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class DaoPutFileMdIndex extends BasePerformanceTest {
     private static Logger logger = LoggerFactory.getLogger(DaoPutFileMdIndex.class);
 
+    private static String methodDesc = "testPutFileMdIndex";
     @Autowired
     private IndexRdbDao indexRdbDao;
 
-    protected DaoPutFileMdIndex(String methodDesc) {
+    public DaoPutFileMdIndex() {
         super(logger, methodDesc);
     }
+
 
     @Override
     public long execMethod(int hotCount, int count) {

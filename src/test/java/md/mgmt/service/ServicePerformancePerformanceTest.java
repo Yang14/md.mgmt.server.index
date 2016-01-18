@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring.xml")
-public class ServicePerformancePerformanceTest extends BasePerformanceTest {
+public class ServicePerformancePerformanceTest {
     private Logger logger = LoggerFactory.getLogger(ServicePerformancePerformanceTest.class);
 
     @Autowired
@@ -35,7 +35,7 @@ public class ServicePerformancePerformanceTest extends BasePerformanceTest {
         }
     }
 
-    @Test
+    /*@Test
     public void testAutoCreateFileMdIndexPerformance() {
         logger.info("------------------------------------------");
         logger.info("start testing service create File MdIndex");
@@ -43,7 +43,7 @@ public class ServicePerformancePerformanceTest extends BasePerformanceTest {
             testCreateFileMdIndex(cycles[i], hotCount, counts[i]);
         }
         logger.info("-------------------end--------------------");
-    }
+    }*/
 
     private void testCreateFileMdIndex(int cycle,int hotCount, int count) {
         long totalTime = 0;

@@ -15,17 +15,19 @@ public abstract class BasePerformanceTest {
     private Logger logger;
     private String methodDesc;
 
-    private static int[] counts = new int[]{10, 5, 3};
-    private static int[] cycles = new int[]{10000, 10000 * 10, 10000 * 100};
+    private static int[] cycles = new int[]{10, 5, 3};
+    private static int[] counts = new int[]{10000, 10000 * 10, 10000 * 100};
     private static int hotCount = 10000;
 
-    protected BasePerformanceTest(Logger logger, String methodDesc) {
+
+
+    public BasePerformanceTest(Logger logger, String methodDesc) {
         this.logger = logger;
         this.methodDesc = methodDesc;
     }
 
     public void moduleMethod() {
-        logger.info("\n------------------------------------------");
+        logger.info("------------------start--------------------");
         logger.info(methodDesc);
         for (int i = 0; i < cycles.length; ++i) {
             calAvgTime(cycles[i], hotCount, counts[i]);
