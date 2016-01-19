@@ -53,6 +53,9 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
         }
         DirMdIndex dirMdIndex = indexFindRdbDao.getDirMdIndex(
                 MdUtils.genMdIndexKey(parentDir.getMdIndex().getFileCode(), mdIndex.getName()));
+        if (mdIndex.getPath().equals("/")){
+            dirMdIndex = parentDir;
+        }
         DistrCodeList distrCodeList = dirMdIndex.getDistrCodeList();
         List<ClusterNodeInfo> clusterNodeInfos = commonModule.getMdLocationList(distrCodeList.getCodeList());
         return new DirMdAttrPosList(clusterNodeInfos);
