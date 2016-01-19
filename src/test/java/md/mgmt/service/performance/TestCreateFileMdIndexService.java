@@ -33,13 +33,11 @@ public class TestCreateFileMdIndexService extends BasePerformanceTest{
     @Override
     public long execMethod(int hotCount, int count) {
         for (int i = 1; i < hotCount; i++) {
-            createMdIndexService.createFileMdIndex(new MdIndex("/home/a/b/c/d/e", "testFile" + i));
+            createMdIndexService.createFileMdIndex(new MdIndex("/home/a", "testFile" + i));
         }
         long start = System.currentTimeMillis();
-        for (int i = 1; i < count/3; i++) {
-            createMdIndexService.createFileMdIndex(new MdIndex("/home/a/b/c/d/e", "testFile" + i));
-            createMdIndexService.createFileMdIndex(new MdIndex("/home/a/b/c/d", "testFile" + i));
-            createMdIndexService.createFileMdIndex(new MdIndex("/home/a/b", "testFile" + i));
+        for (int i = 1; i < count; i++) {
+            createMdIndexService.createFileMdIndex(new MdIndex("/home/a", "testFile" + i));
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count: %s  use Total time: %s ms, avg time: %sms",
