@@ -9,7 +9,7 @@ import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
 import md.mgmt.facade.resp.find.FileMdAttrPosList;
-import md.mgmt.service.MdUtils;
+import md.mgmt.utils.MdUtils;
 import md.mgmt.service.RenameMdIndexService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

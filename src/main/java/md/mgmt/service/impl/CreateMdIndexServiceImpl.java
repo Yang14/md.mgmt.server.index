@@ -11,7 +11,8 @@ import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
 import md.mgmt.facade.resp.index.MdAttrPos;
 import md.mgmt.service.CreateMdIndexService;
-import md.mgmt.service.MdUtils;
+import md.mgmt.utils.MdCacheUtils;
+import md.mgmt.utils.MdUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,9 +68,14 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     }
 
     private MdAttrPos createMdIndex(MdIndex mdIndex, boolean isDir) {
-        DirMdIndex parentDir = indexFindRdbDao.getParentDirMdIndexByPath(mdIndex.getPath());
+        DirMdIndex parentDir = MdCacheUtils.dirMdIndexMap.get(mdIndex.getPath());
         if (parentDir == null) {
-            return null;
+            parentDir = indexFindRdbDao.getParentDirMdIndexByPath(mdIndex.getPath());
+            if (parentDir == null) {
+                logger.error(String.format("createMdIndex:can't find DirMdIndex %s", mdIndex.getPath()));
+                return null;
+            }
+            MdCacheUtils.dirMdIndexMap.put(mdIndex.getPath(), parentDir);
         }
         String fileCode = commonModule.genFileCode();
         putFileMdIndex(parentDir, mdIndex, fileCode, isDir);

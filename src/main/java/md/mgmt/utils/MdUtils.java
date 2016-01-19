@@ -1,4 +1,4 @@
-package md.mgmt.service;
+package md.mgmt.utils;
 
 /**
  * Created by yang on 16-1-17.

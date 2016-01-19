@@ -1,21 +1,16 @@
 package md.mgmt.dao.performance.mock.service;
 
 import md.mgmt.BasePerformanceTest;
-import md.mgmt.base.md.MdIndex;
 import md.mgmt.dao.IndexFindRdbDao;
 import md.mgmt.dao.IndexRdbDao;
 import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.FileMdIndex;
-import md.mgmt.service.MdUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
