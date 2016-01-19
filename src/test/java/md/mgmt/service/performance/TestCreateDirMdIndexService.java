@@ -3,6 +3,7 @@ package md.mgmt.service.performance;
 import md.mgmt.BasePerformanceTest;
 import md.mgmt.base.md.MdIndex;
 import md.mgmt.service.CreateMdIndexService;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,13 @@ public class TestCreateDirMdIndexService extends BasePerformanceTest {
 
     public TestCreateDirMdIndexService() {
         super(logger, methodDesc);
+    }
+
+    @Before
+    public void setUp() {
+        if (createMdIndexService.createRootDir()) {
+            logger.info("root dir create ok.");
+        }
     }
 
     @Override

@@ -27,7 +27,7 @@ public class DaoGetFileMdIndex extends BasePerformanceTest {
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            indexFindRdbDao.getFileMdIndex("key:" + i).toString();
+            indexFindRdbDao.getFileMdIndex("key:" + i);
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count %s  use Total time: %s ms, avg time: %sms",

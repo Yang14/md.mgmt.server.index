@@ -20,7 +20,6 @@ public abstract class BasePerformanceTest {
     private static int hotCount = 10000;
 
 
-
     public BasePerformanceTest(Logger logger, String methodDesc) {
         this.logger = logger;
         this.methodDesc = methodDesc;
@@ -29,7 +28,7 @@ public abstract class BasePerformanceTest {
     public void moduleMethod() {
         logger.info("------------------start--------------------");
         logger.info(methodDesc);
-        for (int i = 0; i < cycles.length; ++i) {
+        for (int i = 0; i < cycles.length - 1; ++i) {
             calAvgTime(cycles[i], hotCount, counts[i]);
         }
         logger.info("-------------------end--------------------\n");
