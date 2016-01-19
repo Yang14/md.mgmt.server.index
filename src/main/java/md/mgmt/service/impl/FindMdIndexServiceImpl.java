@@ -11,6 +11,7 @@ import md.mgmt.facade.resp.find.DirMdAttrPosList;
 import md.mgmt.facade.resp.find.FileMdAttrPosList;
 import md.mgmt.service.FindMdIndexService;
 import md.mgmt.utils.MdCacheUtils;
+import md.mgmt.utils.MdUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,34 +34,40 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
 
     @Override
     public FileMdAttrPosList findFileMdIndex(MdIndex mdIndex) {
-        DirMdIndex dirMdIndex = MdCacheUtils.dirMdIndexMap.get(mdIndex.getPath());
-        if (dirMdIndex == null) {
-            dirMdIndex = indexFindRdbDao.getParentDirMdIndexByPath(mdIndex.getPath());
-            if (dirMdIndex == null) {
-                logger.error(String.format("createMdIndex:can't find DirMdIndex %s", mdIndex.getPath()));
-                return null;
-            }
-            MdCacheUtils.dirMdIndexMap.put(mdIndex.getPath(), dirMdIndex);
+        DirMdIndex parentDir =getParentDirMdIndex(mdIndex.getPath());
+        if (parentDir == null){
+            return null;
         }
-        DistrCodeList distrCodeList = dirMdIndex.getDistrCodeList();
+        DistrCodeList distrCodeList = parentDir.getDistrCodeList();
         List<ClusterNodeInfo> clusterNodeInfos = commonModule.getMdLocationList(distrCodeList.getCodeList());
-        FileMdIndex fileMdIndex = indexFindRdbDao.getFileMd(mdIndex.getPath(), mdIndex.getName());
-        return new FileMdAttrPosList(clusterNodeInfos,fileMdIndex.getFileCode());
+        FileMdIndex fileMdIndex = indexFindRdbDao.getFileMdIndex(
+                MdUtils.genMdIndexKey(parentDir.getMdIndex().getFileCode(), mdIndex.getName()));
+        return new FileMdAttrPosList(clusterNodeInfos, fileMdIndex.getFileCode());
     }
 
     @Override
     public DirMdAttrPosList findDirMdIndex(MdIndex mdIndex) {
-        DirMdIndex dirMdIndex = MdCacheUtils.dirMdIndexMap.get(mdIndex.getPath());
-        if (dirMdIndex == null) {
-            dirMdIndex = indexFindRdbDao.getDirMd(mdIndex);
-            if (dirMdIndex == null) {
-                logger.error(String.format("createMdIndex:can't find DirMdIndex %s", mdIndex.getPath()));
-                return null;
-            }
-            MdCacheUtils.dirMdIndexMap.put(mdIndex.getPath(), dirMdIndex);
+        DirMdIndex parentDir =getParentDirMdIndex(mdIndex.getPath());
+        if (parentDir == null){
+            return null;
         }
+        DirMdIndex dirMdIndex = indexFindRdbDao.getDirMdIndex(
+                MdUtils.genMdIndexKey(parentDir.getMdIndex().getFileCode(), mdIndex.getName()));
         DistrCodeList distrCodeList = dirMdIndex.getDistrCodeList();
         List<ClusterNodeInfo> clusterNodeInfos = commonModule.getMdLocationList(distrCodeList.getCodeList());
         return new DirMdAttrPosList(clusterNodeInfos);
+    }
+
+    private DirMdIndex getParentDirMdIndex(String path){
+        DirMdIndex parentDir = MdCacheUtils.dirMdIndexMap.get(path);
+        if (parentDir == null) {
+            parentDir = indexFindRdbDao.getParentDirMdIndexByPath(path);
+            if (parentDir == null) {
+                logger.error(String.format("createMdIndex:can't find DirMdIndex %s",parentDir));
+                return null;
+            }
+            MdCacheUtils.dirMdIndexMap.put(path, parentDir);
+        }
+        return parentDir;
     }
 }
