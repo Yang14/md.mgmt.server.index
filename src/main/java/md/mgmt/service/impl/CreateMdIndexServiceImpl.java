@@ -83,16 +83,13 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
             //是目录,添加分布列表信息
             putDistrCodeList(fileCode);
         }
-        MdAttrPos mdAttrPos = getMdAttrPos(parentDir, fileCode);
-        return mdAttrPos;
+        return getMdAttrPos(parentDir, fileCode);
     }
 
     private boolean putDistrCodeList(String fileCode) {
         List<Long> codes = new ArrayList<Long>();
         codes.add(commonModule.genDistrCode());
-        DistrCodeList distrCodeList = new DistrCodeList();
-        distrCodeList.setCodeList(codes);
-        return indexRdbDao.putDistrCodeList(fileCode, distrCodeList);
+        return indexRdbDao.putDistrCodeList(fileCode, new DistrCodeList(codes));
     }
 
     /**

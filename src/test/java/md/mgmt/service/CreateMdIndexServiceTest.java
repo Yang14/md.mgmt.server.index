@@ -83,10 +83,10 @@ public class CreateMdIndexServiceTest {
     public void testCreateDirMdIndex() {
         createMdIndexService.createDirMdIndex(new MdIndex("/", "home"));
         createMdIndexService.createDirMdIndex(new MdIndex("/home","a"));
-//        createMdIndexService.createDirMdIndex(new MdIndex("/home/a","b"));
-//        createMdIndexService.createDirMdIndex(new MdIndex("/home/a/b","c"));
-//        createMdIndexService.createDirMdIndex(new MdIndex("/home/a/b/c","d"));
-//        createMdIndexService.createDirMdIndex(new MdIndex("/home/a/b/c/d","e"));
+        createMdIndexService.createDirMdIndex(new MdIndex("/home/a","b"));
+        createMdIndexService.createDirMdIndex(new MdIndex("/home/a/b","c"));
+        createMdIndexService.createDirMdIndex(new MdIndex("/home/a/b/c","d"));
+        createMdIndexService.createDirMdIndex(new MdIndex("/home/a/b/c/d","e"));
     }
 
 

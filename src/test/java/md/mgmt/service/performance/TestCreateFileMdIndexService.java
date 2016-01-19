@@ -3,6 +3,7 @@ package md.mgmt.service.performance;
 import md.mgmt.BasePerformanceTest;
 import md.mgmt.base.md.MdIndex;
 import md.mgmt.service.CreateMdIndexService;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,14 +23,23 @@ public class TestCreateFileMdIndexService extends BasePerformanceTest{
         super(logger, methodDesc);
     }
 
+    @Before
+    public void setUp() {
+        if (createMdIndexService.createRootDir()) {
+            logger.info("root dir create ok.");
+        }
+    }
+
     @Override
     public long execMethod(int hotCount, int count) {
         for (int i = 1; i < hotCount; i++) {
-            createMdIndexService.createFileMdIndex(new MdIndex("/", "testFile" + i));
+            createMdIndexService.createFileMdIndex(new MdIndex("/home/a/b/c/d/e", "testFile" + i));
         }
         long start = System.currentTimeMillis();
-        for (int i = 1; i < count; i++) {
-            createMdIndexService.createFileMdIndex(new MdIndex("/", "testFile" + i));
+        for (int i = 1; i < count/3; i++) {
+            createMdIndexService.createFileMdIndex(new MdIndex("/home/a/b/c/d/e", "testFile" + i));
+            createMdIndexService.createFileMdIndex(new MdIndex("/home/a/b/c/d", "testFile" + i));
+            createMdIndexService.createFileMdIndex(new MdIndex("/home/a/b", "testFile" + i));
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count: %s  use Total time: %s ms, avg time: %sms",

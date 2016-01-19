@@ -14,14 +14,20 @@ import java.util.UUID;
  */
 @Component
 public class CommonModuleImpl implements CommonModule {
+
+    private static long fileCode = 100000;
+    private static long distrCode = 2000000;
+
     @Override
     public String genFileCode() {
-        return UUID.randomUUID().toString().replaceAll("-", "");
+//        return UUID.randomUUID().toString();
+        return "f-" + fileCode++;
     }
 
     @Override
     public Long genDistrCode() {
         return Long.valueOf(new Random().nextInt() & 0x0FFFFFFFF);
+//        return distrCode++;
     }
 
     @Override
