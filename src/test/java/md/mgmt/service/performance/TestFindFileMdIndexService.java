@@ -25,11 +25,11 @@ public class TestFindFileMdIndexService extends BasePerformanceTest{
     @Override
     public long execMethod(int hotCount, int count) {
         for (int i = 1; i < hotCount; i++) {
-            findMdIndexService.findFileMdIndex(new MdIndex("/", "testFile" + i));
+            findMdIndexService.findFileMdIndex(new MdIndex("/home/a/b", "testFile" + i));
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            findMdIndexService.findFileMdIndex(new MdIndex("/", "testFile" + i));
+            findMdIndexService.findFileMdIndex(new MdIndex("/home/a/b", "testFile" + i));
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count: %s  use Total time: %s ms, avg time: %sms",
