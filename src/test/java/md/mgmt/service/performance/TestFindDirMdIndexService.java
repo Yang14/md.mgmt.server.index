@@ -26,11 +26,11 @@ public class TestFindDirMdIndexService extends BasePerformanceTest{
     public long execMethod(int hotCount, int count) {
         String dirName = "tstDir-";
         for (int i = 1; i < hotCount; i++) {
-            findMdIndexService.findDirMdIndex(new MdIndex("/", dirName + i));
+            findMdIndexService.findDirMdIndex(new MdIndex("/home/a/b/c/d/e", dirName + i));
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            findMdIndexService.findDirMdIndex(new MdIndex("/", dirName + i));
+            findMdIndexService.findDirMdIndex(new MdIndex("/home/a/b/c/d/e", dirName + i));
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count: %s  use Total time: %s ms, avg time: %sms",
