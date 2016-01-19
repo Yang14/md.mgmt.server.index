@@ -47,7 +47,7 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
 
     @Override
     public DirMdAttrPosList findDirMdIndex(MdIndex mdIndex) {
-        DirMdIndex parentDir =getParentDirMdIndex(mdIndex.getPath());
+        DirMdIndex parentDir = getParentDirMdIndex(mdIndex.getPath());
         if (parentDir == null){
             return null;
         }
