@@ -61,7 +61,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         String parentFileCode = parentDir.getFileCode();
         String key = MdUtils.genMdIndexKey(parentFileCode, mdIndex.getName());
         createRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, false));
-        return getMdAttrPos(parentDir, fileCode);
+        return getMdAttrPos(parentDir, mdIndex.getPath(), fileCode);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         String fileCode = commonModule.genFileCode();
         String key = MdUtils.genMdIndexKey(parentDir.getFileCode(), mdIndex.getName());
         createRdbDao.putNewDirIndex(key, new DirMdIndex(fileCode, true, distrCodes));
-        return getMdAttrPos(parentDir, fileCode);
+        return getMdAttrPos(parentDir, mdIndex.getPath(), fileCode);
     }
 
     private DirMdIndex getParentDirMdIndex(String path) {
@@ -92,7 +92,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         return parentDir;
     }
 
-    private MdAttrPos getMdAttrPos(DirMdIndex parentDir, String fileCode) {
+    private MdAttrPos getMdAttrPos(DirMdIndex parentDir, String path, String fileCode) {
         List<Long> distrCodeList = parentDir.getDistrCodeList();
         long distrCode = distrCodeList.get(distrCodeList.size() - 1);
         boolean isFit = commonModule.checkDistrCodeFit(distrCode);
@@ -103,7 +103,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         } else {
             clusterNodeInfo = commonModule.genMdLocation();
             //更新父目录的分布编码列表，传入父目录的编码
-            updateDistrCodeListWithNewCode(parentDir, clusterNodeInfo.getDistrCode());
+            updateDistrCodeListWithNewCode(parentDir, path, clusterNodeInfo.getDistrCode());
         }
         ExactCode exactCode = new ExactCode(distrCode, fileCode);
         mdAttrPos.setClusterNodeInfo(clusterNodeInfo);
@@ -111,13 +111,27 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         return mdAttrPos;
     }
 
-    //TODO
     //先要得到保存父目录的键，再更新节点信息
-    private boolean updateDistrCodeListWithNewCode(DirMdIndex parentDir, long newCode) {
+    private boolean updateDistrCodeListWithNewCode(DirMdIndex parentDir, String parentPath, long newCode) {
+        String key = "";
+        if (parentPath.equals("/")) {
+            key = MdUtils.genMdIndexKey("-1", "/");
+        } else {
+            key = getParentDirKey(parentPath);
+        }
         List<Long> distrCodeList = parentDir.getDistrCodeList();
         distrCodeList.add(newCode);
         parentDir.setDistrCodeList(distrCodeList);
-        return createRdbDao.putNewDirIndex("", parentDir);
+        createRdbDao.removeFileMdIndex(key);
+        return createRdbDao.putNewDirIndex(key, parentDir);
+    }
+
+    private String getParentDirKey(String path) {
+        int pos = path.lastIndexOf("/");
+        String front = path.substring(0, pos);
+        String end = path.substring(pos + 1);
+        DirMdIndex parentDir = getParentDirMdIndex(front);
+        return MdUtils.genMdIndexKey(parentDir.getFileCode(), end);
     }
 
 }
