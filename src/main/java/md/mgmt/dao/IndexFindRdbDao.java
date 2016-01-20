@@ -1,6 +1,7 @@
 package md.mgmt.dao;
 
 import md.mgmt.base.md.MdIndex;
+import md.mgmt.dao.entity.BigDirMdIndex;
 import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.FileMdIndex;
 
@@ -21,4 +22,6 @@ public interface IndexFindRdbDao {
     public FileMdIndex getFileMdIndex(String key);
 
     public DirMdIndex getDirMdIndex(String key);
+
+    public BigDirMdIndex getBigDirMdIndex(String key);
 }

@@ -2,11 +2,9 @@ package md.mgmt.dao.impl;
 
 import com.alibaba.fastjson.JSON;
 import md.mgmt.dao.IndexRdbDao;
+import md.mgmt.dao.entity.BigDirMdIndex;
 import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
-import org.rocksdb.Options;
-import org.rocksdb.RocksDB;
-import org.rocksdb.RocksDBException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -45,5 +43,10 @@ public class IndexRdbDaoImpl extends BaseRdb implements IndexRdbDao {
             logger.error(String.format("[ERROR] caught the unexpected exception -- %s\n", e));
         }
         return false;
+    }
+
+    @Override
+    public boolean putNewDirIndex(String key, BigDirMdIndex dirMdIndex) {
+        return put(key,dirMdIndex);
     }
 }

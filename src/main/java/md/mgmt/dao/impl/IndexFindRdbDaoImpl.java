@@ -91,6 +91,19 @@ public class IndexFindRdbDaoImpl extends BaseRdb implements IndexFindRdbDao {
         return null;
     }
 
+    @Override
+    public BigDirMdIndex getBigDirMdIndex(String key) {
+        try {
+            byte[] indexBytes = db.get(key.getBytes(RDB_DECODE));
+            if (indexBytes != null) {
+                return JSON.parseObject(new String(indexBytes, RDB_DECODE), BigDirMdIndex.class);
+            }
+        } catch (Exception e) {
+            logger.error(String.format("[ERROR] caught the unexpected exception -- %s\n", e));
+        }
+        return null;
+    }
+
     public FileMdIndex getFileMdIndex(String key) {
         try {
             byte[] indexBytes = db.get(key.getBytes(RDB_DECODE));
