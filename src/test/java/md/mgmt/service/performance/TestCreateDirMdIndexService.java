@@ -32,7 +32,7 @@ public class TestCreateDirMdIndexService extends BasePerformanceTest {
 
     @Override
     public long execMethod(int hotCount, int count) {
-        String path = "/";
+        String path = "/home/a/b/c/d/e";
         String dirName = "tstDir-";
         for (int i = 1; i < hotCount; i++) {
             createMdIndexService.createDirMdIndex(new MdIndex(path, dirName + i));

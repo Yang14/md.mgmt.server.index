@@ -32,7 +32,7 @@ public class TestCreateFileMdIndexService extends BasePerformanceTest {
 
     @Override
     public long execMethod(int hotCount, int count) {
-        String path = "/home";
+        String path = "/home/a";
         for (int i = 1; i < hotCount; i++) {
             createMdIndexService.createFileMdIndex(new MdIndex(path, "testFile" + i));
         }

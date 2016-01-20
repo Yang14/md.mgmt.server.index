@@ -51,7 +51,7 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
         }
         NewDirMdIndex dirMdIndex = findRdbDao.getNewDirMdIndex(
                 MdUtils.genMdIndexKey(parentDir.getFileCode(), mdIndex.getName()));
-        if (mdIndex.getPath().equals("/")) {
+        if (mdIndex.getPath().equals("/") && mdIndex.getName().equals("")) {
             dirMdIndex = parentDir;
         }
         List<Long> distrCodeList = dirMdIndex.getDistrCodeList();
