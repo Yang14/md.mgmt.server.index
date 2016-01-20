@@ -1,7 +1,7 @@
 package md.mgmt.dao.performance;
 
 import md.mgmt.BasePerformanceTest;
-import md.mgmt.dao.IndexRdbDao;
+import md.mgmt.dao.CreateRdbDao;
 import md.mgmt.dao.entity.FileMdIndex;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -16,7 +16,7 @@ public class DaoPutFileMdIndex extends BasePerformanceTest {
 
     private static String methodDesc = "testPutFileMdIndex";
     @Autowired
-    private IndexRdbDao indexRdbDao;
+    private CreateRdbDao createRdbDao;
 
     public DaoPutFileMdIndex() {
         super(logger, methodDesc);
@@ -26,11 +26,11 @@ public class DaoPutFileMdIndex extends BasePerformanceTest {
     @Override
     public long execMethod(int hotCount, int count) {
         for (int i = 1; i < hotCount; i++) {
-            indexRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
+            createRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            indexRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
+            createRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count %s  use Total time: %s ms, avg time: %sms",

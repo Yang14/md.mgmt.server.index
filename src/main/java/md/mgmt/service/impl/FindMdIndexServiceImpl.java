@@ -3,7 +3,7 @@ package md.mgmt.service.impl;
 import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.base.md.MdIndex;
 import md.mgmt.common.CommonModule;
-import md.mgmt.dao.IndexFindRdbDao;
+import md.mgmt.dao.FindRdbDao;
 import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
@@ -27,7 +27,7 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
     private Logger logger = LoggerFactory.getLogger(FindMdIndexServiceImpl.class);
 
     @Autowired
-    private IndexFindRdbDao indexFindRdbDao;
+    private FindRdbDao findRdbDao;
 
     @Autowired
     private CommonModule commonModule;
@@ -40,7 +40,7 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
         }
         DistrCodeList distrCodeList = parentDir.getDistrCodeList();
         List<ClusterNodeInfo> clusterNodeInfos = commonModule.getMdLocationList(distrCodeList.getCodeList());
-        FileMdIndex fileMdIndex = indexFindRdbDao.getFileMdIndex(
+        FileMdIndex fileMdIndex = findRdbDao.getFileMdIndex(
                 MdUtils.genMdIndexKey(parentDir.getMdIndex().getFileCode(), mdIndex.getName()));
         return new FileMdAttrPosList(clusterNodeInfos, fileMdIndex.getFileCode());
     }
@@ -51,7 +51,7 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
         if (parentDir == null) {
             return null;
         }
-        DirMdIndex dirMdIndex = indexFindRdbDao.getDirMdIndex(
+        DirMdIndex dirMdIndex = findRdbDao.getDirMdIndex(
                 MdUtils.genMdIndexKey(parentDir.getMdIndex().getFileCode(), mdIndex.getName()));
         if (mdIndex.getPath().equals("/")) {
             dirMdIndex = parentDir;
@@ -64,7 +64,7 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
     private DirMdIndex getParentDirMdIndex(String path) {
         DirMdIndex parentDir = MdCacheUtils.dirMdIndexMap.get(path);
         if (parentDir == null) {
-            parentDir = indexFindRdbDao.getParentDirMdIndexByPath(path);
+            parentDir = findRdbDao.getParentDirMdIndexByPath(path);
             if (parentDir == null) {
                 logger.error(String.format("createMdIndex:can't find DirMdIndex %s", parentDir));
                 return null;

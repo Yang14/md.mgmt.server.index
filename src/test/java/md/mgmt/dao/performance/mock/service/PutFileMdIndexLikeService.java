@@ -1,8 +1,8 @@
 package md.mgmt.dao.performance.mock.service;
 
 import md.mgmt.BasePerformanceTest;
-import md.mgmt.dao.IndexFindRdbDao;
-import md.mgmt.dao.IndexRdbDao;
+import md.mgmt.dao.FindRdbDao;
+import md.mgmt.dao.CreateRdbDao;
 import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.FileMdIndex;
 import org.junit.Test;
@@ -21,10 +21,10 @@ public class PutFileMdIndexLikeService extends BasePerformanceTest {
 
     private static String methodDesc = "testPutFileMdIndexLikeService";
     @Autowired
-    private IndexRdbDao indexRdbDao;
+    private CreateRdbDao createRdbDao;
 
     @Autowired
-    private IndexFindRdbDao indexFindRdbDao;
+    private FindRdbDao findRdbDao;
 
     public PutFileMdIndexLikeService() {
         super(logger, methodDesc);
@@ -39,8 +39,8 @@ public class PutFileMdIndexLikeService extends BasePerformanceTest {
     public long execMethod(int hotCount, int count) {
         String key = -1 + ":" + "/";
         for (int i = 1; i < hotCount; i++) {
-            indexFindRdbDao.getDirMdIndex(key);
-            indexRdbDao.putFileMdIndex(0 + ":" + i, new FileMdIndex(i + "", false));
+            findRdbDao.getDirMdIndex(key);
+            createRdbDao.putFileMdIndex(0 + ":" + i, new FileMdIndex(i + "", false));
         }
         Map<String, DirMdIndex> hashMap = new ConcurrentHashMap<String, DirMdIndex>();
 
@@ -48,10 +48,10 @@ public class PutFileMdIndexLikeService extends BasePerformanceTest {
         for (int i = 1; i < count; i++) {
             DirMdIndex dirMdIndex = hashMap.get(key);
             if (dirMdIndex == null) {
-                dirMdIndex = indexFindRdbDao.getDirMdIndex(key);
+                dirMdIndex = findRdbDao.getDirMdIndex(key);
                 hashMap.put(key, dirMdIndex);
             }
-            indexRdbDao.putFileMdIndex(dirMdIndex.getMdIndex().getFileCode() + ":" + i, new FileMdIndex(i + "", false));
+            createRdbDao.putFileMdIndex(dirMdIndex.getMdIndex().getFileCode() + ":" + i, new FileMdIndex(i + "", false));
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count %s  use Total time: %s ms, avg time: %sms",

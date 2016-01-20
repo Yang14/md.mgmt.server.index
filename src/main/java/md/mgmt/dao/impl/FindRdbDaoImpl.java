@@ -2,7 +2,7 @@ package md.mgmt.dao.impl;
 
 import com.alibaba.fastjson.JSON;
 import md.mgmt.base.md.MdIndex;
-import md.mgmt.dao.IndexFindRdbDao;
+import md.mgmt.dao.FindRdbDao;
 import md.mgmt.dao.entity.*;
 import md.mgmt.utils.MdUtils;
 import org.slf4j.Logger;
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
  * Created by Mr-yang on 16-1-12.
  */
 @Component
-public class IndexFindRdbDaoImpl extends BaseRdb implements IndexFindRdbDao {
-    private static Logger logger = LoggerFactory.getLogger(IndexRdbDaoImpl.class);
+public class FindRdbDaoImpl extends BaseRdb implements FindRdbDao {
+    private static Logger logger = LoggerFactory.getLogger(CreateRdbDaoImpl.class);
 
 
     @Override

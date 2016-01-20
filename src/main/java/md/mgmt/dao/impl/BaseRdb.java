@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
  * Created by yang on 16-1-16.
  */
 public class BaseRdb {
-    private static Logger logger = LoggerFactory.getLogger(IndexRdbDaoImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(CreateRdbDaoImpl.class);
 
     public static final String DB_PATH = "/data/index";
     public static Options options = new Options().setCreateIfMissing(true);

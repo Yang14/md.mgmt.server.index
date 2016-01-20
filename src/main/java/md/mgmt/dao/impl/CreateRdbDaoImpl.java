@@ -1,7 +1,7 @@
 package md.mgmt.dao.impl;
 
 import com.alibaba.fastjson.JSON;
-import md.mgmt.dao.IndexRdbDao;
+import md.mgmt.dao.CreateRdbDao;
 import md.mgmt.dao.entity.BigDirMdIndex;
 import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
  * Created by Mr-yang on 16-1-11.
  */
 @Component
-public class IndexRdbDaoImpl extends BaseRdb implements IndexRdbDao {
-    private static Logger logger = LoggerFactory.getLogger(IndexRdbDaoImpl.class);
+public class CreateRdbDaoImpl extends BaseRdb implements CreateRdbDao {
+    private static Logger logger = LoggerFactory.getLogger(CreateRdbDaoImpl.class);
 
     @Override
     public boolean putFileMdIndex(String key, FileMdIndex fileMdIndex) {

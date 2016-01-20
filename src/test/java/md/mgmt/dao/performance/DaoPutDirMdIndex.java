@@ -1,8 +1,7 @@
 package md.mgmt.dao.performance;
 
 import md.mgmt.BasePerformanceTest;
-import md.mgmt.dao.IndexFindRdbDao;
-import md.mgmt.dao.IndexRdbDao;
+import md.mgmt.dao.CreateRdbDao;
 import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
 import org.junit.Test;
@@ -20,7 +19,7 @@ public class DaoPutDirMdIndex extends BasePerformanceTest {
     private static Logger logger = LoggerFactory.getLogger(DaoPutDirMdIndex.class);
     private static String methodDesc = "testPutDirMdIndex";
     @Autowired
-    private IndexRdbDao indexRdbDao;
+    private CreateRdbDao createRdbDao;
 
     public DaoPutDirMdIndex() {
         super(logger, methodDesc);
@@ -29,15 +28,15 @@ public class DaoPutDirMdIndex extends BasePerformanceTest {
     @Override
     public long execMethod(int hotCount, int count) {
         for (int i = 1; i < hotCount; i++) {
-            indexRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
+            createRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
         }
         long code = 10;
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            indexRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
+            createRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
             List<Long> distrCodes = new ArrayList<Long>();
             distrCodes.add(code++);
-            indexRdbDao.putDistrCodeList(i + "", new DistrCodeList(distrCodes));
+            createRdbDao.putDistrCodeList(i + "", new DistrCodeList(distrCodes));
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count %s  use Total time: %s ms, avg time: %sms",

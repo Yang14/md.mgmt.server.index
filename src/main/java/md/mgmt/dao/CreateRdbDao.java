@@ -7,7 +7,7 @@ import md.mgmt.dao.entity.FileMdIndex;
 /**
  * Created by Mr-yang on 16-1-11.
  */
-public interface IndexRdbDao {
+public interface CreateRdbDao {
 
     /**
      * FileMdIndex转成JSONStr，再把str转成byte[]存储

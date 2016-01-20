@@ -4,8 +4,8 @@ import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.base.md.ExactCode;
 import md.mgmt.base.md.MdIndex;
 import md.mgmt.common.CommonModule;
-import md.mgmt.dao.IndexFindRdbDao;
-import md.mgmt.dao.IndexRdbDao;
+import md.mgmt.dao.FindRdbDao;
+import md.mgmt.dao.CreateRdbDao;
 import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
@@ -29,9 +29,9 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     private Logger logger = LoggerFactory.getLogger(CreateMdIndexServiceImpl.class);
 
     @Autowired
-    private IndexRdbDao indexRdbDao;
+    private CreateRdbDao createRdbDao;
     @Autowired
-    private IndexFindRdbDao indexFindRdbDao;
+    private FindRdbDao findRdbDao;
 
     @Autowired
     private CommonModule commonModule;
@@ -47,14 +47,14 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         long distrCode = 0;
         String name = "/";
         String key = MdUtils.genMdIndexKey(parentCode, name);
-        if (!indexRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, true))) {
+        if (!createRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, true))) {
             return false;
         }
         List<Long> codes = new ArrayList<Long>();
         codes.add(distrCode);
         DistrCodeList distrCodeList = new DistrCodeList();
         distrCodeList.setCodeList(codes);
-        return indexRdbDao.putDistrCodeList(fileCode, distrCodeList);
+        return createRdbDao.putDistrCodeList(fileCode, distrCodeList);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     private MdAttrPos createMdIndex(MdIndex mdIndex, boolean isDir) {
         DirMdIndex parentDir = MdCacheUtils.dirMdIndexMap.get(mdIndex.getPath());
         if (parentDir == null) {
-            parentDir = indexFindRdbDao.getParentDirMdIndexByPath(mdIndex.getPath());
+            parentDir = findRdbDao.getParentDirMdIndexByPath(mdIndex.getPath());
             if (parentDir == null) {
                 logger.error(String.format("createMdIndex:can't find DirMdIndex %s", mdIndex.getPath()));
                 return null;
@@ -89,7 +89,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     private boolean putDistrCodeList(String fileCode) {
         List<Long> codes = new ArrayList<Long>();
         codes.add(commonModule.genDistrCode());
-        return indexRdbDao.putDistrCodeList(fileCode, new DistrCodeList(codes));
+        return createRdbDao.putDistrCodeList(fileCode, new DistrCodeList(codes));
     }
 
     /**
@@ -99,7 +99,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     private boolean putFileMdIndex(DirMdIndex parentDir, MdIndex mdIndex, String fileCode, boolean isDir) {
         String parentFileCode = parentDir.getMdIndex().getFileCode();
         String key = MdUtils.genMdIndexKey(parentFileCode, mdIndex.getName());
-        return indexRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, isDir));
+        return createRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, isDir));
     }
 
     private MdAttrPos getMdAttrPos(DirMdIndex parentDir, String fileCode) {
@@ -123,12 +123,11 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
 
     private boolean updateDistrCodeListWithNewCode(DirMdIndex parentDir, long newCode) {
         String parentFileCode = parentDir.getMdIndex().getFileCode();
-
         List<Long> distrCodeList = parentDir.getDistrCodeList().getCodeList();
         distrCodeList.add(newCode);
         DistrCodeList distrCodeList1 = parentDir.getDistrCodeList();
         distrCodeList1.setCodeList(distrCodeList);
-        return indexRdbDao.putDistrCodeList(parentFileCode, distrCodeList1);
+        return createRdbDao.putDistrCodeList(parentFileCode, distrCodeList1);
     }
 
 }

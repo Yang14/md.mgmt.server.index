@@ -1,7 +1,7 @@
 package md.mgmt.dao.performance;
 
 import md.mgmt.BasePerformanceTest;
-import md.mgmt.dao.IndexFindRdbDao;
+import md.mgmt.dao.FindRdbDao;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ public class DaoGetDirMdIndex extends BasePerformanceTest {
     private static Logger logger = LoggerFactory.getLogger(DaoGetDirMdIndex.class);
     private static String methodDesc = "testGetDirMdIndex";
     @Autowired
-    private IndexFindRdbDao indexFindRdbDao;
+    private FindRdbDao findRdbDao;
 
     public DaoGetDirMdIndex() {
         super(logger, methodDesc);
@@ -23,11 +23,11 @@ public class DaoGetDirMdIndex extends BasePerformanceTest {
     @Override
     public long execMethod(int hotCount, int count) {
         for (int i = 1; i < hotCount; i++) {
-            indexFindRdbDao.getDirMdIndex("key:" + i);
+            findRdbDao.getDirMdIndex("key:" + i);
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            indexFindRdbDao.getDirMdIndex("key:" + i);
+            findRdbDao.getDirMdIndex("key:" + i);
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count %s  use Total time: %s ms, avg time: %sms",

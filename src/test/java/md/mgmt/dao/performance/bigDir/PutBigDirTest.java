@@ -1,7 +1,7 @@
 package md.mgmt.dao.performance.bigDir;
 
 import md.mgmt.BasePerformanceTest;
-import md.mgmt.dao.IndexRdbDao;
+import md.mgmt.dao.CreateRdbDao;
 import md.mgmt.dao.entity.BigDirMdIndex;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ public class PutBigDirTest extends BasePerformanceTest {
     private static String methodDesc = "PutBigDirTest";
 
     @Autowired
-    private IndexRdbDao indexRdbDao;
+    private CreateRdbDao createRdbDao;
 
     public PutBigDirTest() {
         super(logger, methodDesc);
@@ -37,14 +37,14 @@ public class PutBigDirTest extends BasePerformanceTest {
             List<Long> codes = new ArrayList<Long>();
             codes.add(code++);
             BigDirMdIndex dirMdIndex = new BigDirMdIndex(i + "", true, codes);
-            indexRdbDao.putNewDirIndex("key:" + i, dirMdIndex);
+            createRdbDao.putNewDirIndex("key:" + i, dirMdIndex);
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
             List<Long> codes = new ArrayList<Long>();
             codes.add(code++);
             BigDirMdIndex dirMdIndex = new BigDirMdIndex(i + "", true, codes);
-            indexRdbDao.putNewDirIndex("key:" + i, dirMdIndex);
+            createRdbDao.putNewDirIndex("key:" + i, dirMdIndex);
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count %s  use Total time: %s ms, avg time: %sms",

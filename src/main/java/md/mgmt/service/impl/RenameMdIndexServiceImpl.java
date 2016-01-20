@@ -3,8 +3,8 @@ package md.mgmt.service.impl;
 import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.base.ops.RenamedMd;
 import md.mgmt.common.CommonModule;
-import md.mgmt.dao.IndexFindRdbDao;
-import md.mgmt.dao.IndexRdbDao;
+import md.mgmt.dao.FindRdbDao;
+import md.mgmt.dao.CreateRdbDao;
 import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
@@ -26,10 +26,10 @@ public class RenameMdIndexServiceImpl implements RenameMdIndexService {
     private Logger logger = LoggerFactory.getLogger(RenameMdIndexServiceImpl.class);
 
     @Autowired
-    private IndexFindRdbDao indexFindRdbDao;
+    private FindRdbDao findRdbDao;
 
     @Autowired
-    private IndexRdbDao indexRdbDao;
+    private CreateRdbDao createRdbDao;
 
     @Autowired
     private CommonModule commonModule;
@@ -37,7 +37,7 @@ public class RenameMdIndexServiceImpl implements RenameMdIndexService {
     @Override
     public FileMdAttrPosList renameMdIndex(RenamedMd renamedMd) {
         FileMdAttrPosList fileMdAttrPosList = new FileMdAttrPosList();
-        DirMdIndex dirMdIndex = indexFindRdbDao.getParentDirMdIndexByPath(renamedMd.getPath());
+        DirMdIndex dirMdIndex = findRdbDao.getParentDirMdIndexByPath(renamedMd.getPath());
         if (dirMdIndex == null){
             return null;
         }
@@ -45,7 +45,7 @@ public class RenameMdIndexServiceImpl implements RenameMdIndexService {
         logger.info(distrCodeList.toString());
         List<ClusterNodeInfo> clusterNodeInfos = commonModule.getMdLocationList(distrCodeList.getCodeList());
         fileMdAttrPosList.setClusterNodeInfos(clusterNodeInfos);
-        FileMdIndex fileMdIndex = indexFindRdbDao.getFileMd(renamedMd.getPath(),renamedMd.getName());
+        FileMdIndex fileMdIndex = findRdbDao.getFileMd(renamedMd.getPath(),renamedMd.getName());
         fileMdAttrPosList.setFileCode(fileMdIndex.getFileCode());
 
         renameFileMdIndex(dirMdIndex.getMdIndex().getFileCode(), renamedMd, fileMdIndex);
@@ -55,11 +55,11 @@ public class RenameMdIndexServiceImpl implements RenameMdIndexService {
     private boolean renameFileMdIndex(String parentCode, RenamedMd renamedMd, FileMdIndex fileMdIndex) {
         removeFileMdIndex(parentCode,renamedMd.getName());
         String key = MdUtils.genMdIndexKey(parentCode, renamedMd.getNewName());
-        return indexRdbDao.putFileMdIndex(key, fileMdIndex);
+        return createRdbDao.putFileMdIndex(key, fileMdIndex);
     }
 
     private void removeFileMdIndex(String parentCode, String name) {
         String key = MdUtils.genMdIndexKey(parentCode, name);
-        indexRdbDao.removeFileMdIndex(key);
+        createRdbDao.removeFileMdIndex(key);
     }
 }

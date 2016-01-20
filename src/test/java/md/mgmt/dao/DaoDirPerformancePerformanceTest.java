@@ -22,10 +22,10 @@ public class DaoDirPerformancePerformanceTest  {
     private Logger logger = LoggerFactory.getLogger(DaoDirPerformancePerformanceTest.class);
 
     @Autowired
-    private IndexRdbDao indexRdbDao;
+    private CreateRdbDao createRdbDao;
 
     @Autowired
-    private IndexFindRdbDao indexFindRdbDao;
+    private FindRdbDao findRdbDao;
 
 
 
@@ -33,12 +33,12 @@ public class DaoDirPerformancePerformanceTest  {
     public void testGetFileMdIndex() {
         int count = 10000 * 10;
         for (int i = 1; i < 10000; i++) {
-            indexFindRdbDao.getFileMdIndex("key:" + i);
+            findRdbDao.getFileMdIndex("key:" + i);
         }
         logger.info(String.valueOf(System.currentTimeMillis()));
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            logger.info(indexFindRdbDao.getFileMdIndex("key:" + i).toString());
+            logger.info(findRdbDao.getFileMdIndex("key:" + i).toString());
         }
         long end = System.currentTimeMillis();
         logger.info(String.valueOf(System.currentTimeMillis()));
@@ -60,15 +60,15 @@ public class DaoDirPerformancePerformanceTest  {
 
     private void putDirMdIndex(int hotCount, int count) {
         for (int i = 1; i < hotCount; i++) {
-            indexRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
+            createRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
         }
         long code = 1;
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            indexRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
+            createRdbDao.putFileMdIndex("key:" + i, new FileMdIndex(i + "", false));
             List<Long> distrCodes = new ArrayList<Long>();
             distrCodes.add(code++);
-            indexRdbDao.putDistrCodeList(i + "", new DistrCodeList(distrCodes));
+            createRdbDao.putDistrCodeList(i + "", new DistrCodeList(distrCodes));
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("testPutFileMdIndex %s  use Total time: %s ms, avg time: %sms",
@@ -89,11 +89,11 @@ public class DaoDirPerformancePerformanceTest  {
 
     private void getDirMdIndex(int hotCount, int count) {
         for (int i = 1; i < hotCount; i++) {
-            indexFindRdbDao.getDirMdIndex("key:" + i);
+            findRdbDao.getDirMdIndex("key:" + i);
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            indexFindRdbDao.getDirMdIndex("key:" + i);
+            findRdbDao.getDirMdIndex("key:" + i);
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("testPutFileMdIndex %s  use Total time: %s ms, avg time: %sms",

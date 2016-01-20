@@ -1,7 +1,7 @@
 package md.mgmt.dao.performance;
 
 import md.mgmt.BasePerformanceTest;
-import md.mgmt.dao.IndexFindRdbDao;
+import md.mgmt.dao.FindRdbDao;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ public class DaoGetFileMdIndex extends BasePerformanceTest {
     private static Logger logger = LoggerFactory.getLogger(DaoGetFileMdIndex.class);
     private static String methodDesc = "testPutFileMdIndex";
     @Autowired
-    private IndexFindRdbDao indexFindRdbDao;
+    private FindRdbDao findRdbDao;
 
     public DaoGetFileMdIndex() {
         super(logger, methodDesc);
@@ -23,11 +23,11 @@ public class DaoGetFileMdIndex extends BasePerformanceTest {
     @Override
     public long execMethod(int hotCount, int count) {
         for (int i = 1; i < hotCount; i++) {
-            indexFindRdbDao.getFileMdIndex("f-100000:testFile" + i);
+            findRdbDao.getFileMdIndex("f-100000:testFile" + i);
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            indexFindRdbDao.getFileMdIndex("f-100000:testFile" + i);
+            findRdbDao.getFileMdIndex("f-100000:testFile" + i);
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count %s  use Total time: %s ms, avg time: %sms",

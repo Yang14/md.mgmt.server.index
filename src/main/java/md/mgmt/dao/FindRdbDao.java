@@ -8,7 +8,7 @@ import md.mgmt.dao.entity.FileMdIndex;
 /**
  * Created by Mr-yang on 16-1-12.
  */
-public interface IndexFindRdbDao {
+public interface FindRdbDao {
 
     /**
      * 根据传入的路径找到最底层目录的目录索引
