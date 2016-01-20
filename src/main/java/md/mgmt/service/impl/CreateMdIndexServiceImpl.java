@@ -4,11 +4,10 @@ import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.base.md.ExactCode;
 import md.mgmt.base.md.MdIndex;
 import md.mgmt.common.CommonModule;
-import md.mgmt.dao.FindRdbDao;
 import md.mgmt.dao.CreateRdbDao;
-import md.mgmt.dao.entity.DirMdIndex;
-import md.mgmt.dao.entity.DistrCodeList;
+import md.mgmt.dao.FindRdbDao;
 import md.mgmt.dao.entity.FileMdIndex;
+import md.mgmt.dao.entity.NewDirMdIndex;
 import md.mgmt.facade.resp.index.MdAttrPos;
 import md.mgmt.service.CreateMdIndexService;
 import md.mgmt.utils.MdCacheUtils;
@@ -32,13 +31,12 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
     private CreateRdbDao createRdbDao;
     @Autowired
     private FindRdbDao findRdbDao;
-
     @Autowired
     private CommonModule commonModule;
 
     /**
      * 创建根目录节点
-     * 指定根目录的编号，自身编码和分布编码都是0
+     * 指定根目录的编号，自身编码-1，分布编码都是0
      */
     @Override
     public boolean createRootDir() {
@@ -47,63 +45,55 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         long distrCode = 0;
         String name = "/";
         String key = MdUtils.genMdIndexKey(parentCode, name);
-        if (!createRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, true))) {
-            return false;
-        }
         List<Long> codes = new ArrayList<Long>();
         codes.add(distrCode);
-        DistrCodeList distrCodeList = new DistrCodeList();
-        distrCodeList.setCodeList(codes);
-        return createRdbDao.putDistrCodeList(fileCode, distrCodeList);
+        NewDirMdIndex dirMdIndex = new NewDirMdIndex(fileCode, true, codes);
+        return createRdbDao.putNewDirIndex(key, dirMdIndex);
     }
 
     @Override
     public MdAttrPos createFileMdIndex(MdIndex mdIndex) {
-        return createMdIndex(mdIndex, false);
+        NewDirMdIndex parentDir = getParentDirMdIndex(mdIndex.getPath());
+        if (parentDir == null) {
+            return null;
+        }
+        String fileCode = commonModule.genFileCode();
+        String parentFileCode = parentDir.getFileCode();
+        String key = MdUtils.genMdIndexKey(parentFileCode, mdIndex.getName());
+        createRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, false));
+        return getMdAttrPos(parentDir, fileCode);
     }
 
     @Override
     public MdAttrPos createDirMdIndex(MdIndex mdIndex) {
-        return createMdIndex(mdIndex, true);
-    }
-
-    private MdAttrPos createMdIndex(MdIndex mdIndex, boolean isDir) {
-        DirMdIndex parentDir = MdCacheUtils.dirMdIndexMap.get(mdIndex.getPath());
+        NewDirMdIndex parentDir = getParentDirMdIndex(mdIndex.getPath());
         if (parentDir == null) {
-            parentDir = findRdbDao.getParentDirMdIndexByPath(mdIndex.getPath());
-            if (parentDir == null) {
-                logger.error(String.format("createMdIndex:can't find DirMdIndex %s", mdIndex.getPath()));
-                return null;
-            }
-            MdCacheUtils.dirMdIndexMap.put(mdIndex.getPath(), parentDir);
+            return null;
         }
+        List<Long> distrCodes = new ArrayList<Long>();
+        distrCodes.add(commonModule.genDistrCode());
         String fileCode = commonModule.genFileCode();
-        putFileMdIndex(parentDir, mdIndex, fileCode, isDir);
-        if (isDir) {
-            //是目录,添加分布列表信息
-            putDistrCodeList(fileCode);
-        }
+        String key = MdUtils.genMdIndexKey(parentDir.getFileCode(), mdIndex.getName());
+        createRdbDao.putNewDirIndex(key, new NewDirMdIndex(fileCode, true, distrCodes));
         return getMdAttrPos(parentDir, fileCode);
     }
 
-    private boolean putDistrCodeList(String fileCode) {
-        List<Long> codes = new ArrayList<Long>();
-        codes.add(commonModule.genDistrCode());
-        return createRdbDao.putDistrCodeList(fileCode, new DistrCodeList(codes));
+    private NewDirMdIndex getParentDirMdIndex(String path) {
+        NewDirMdIndex parentDir = MdCacheUtils.dirMdIndexMap.get(path);
+        if (parentDir == null) {
+            parentDir = findRdbDao.getParentDirMdIndexByPath(path);
+            if (parentDir == null) {
+                logger.error(String.format("createMdIndex:can't find DirMdIndex %s", parentDir));
+                return null;
+            }
+            MdCacheUtils.dirMdIndexMap.put(path, parentDir);
+            logger.info(String.format("%s cache failed...", path));
+        }
+        return parentDir;
     }
 
-    /**
-     * 插入元数据索引节点
-     * 目录和文件都需要这一步
-     */
-    private boolean putFileMdIndex(DirMdIndex parentDir, MdIndex mdIndex, String fileCode, boolean isDir) {
-        String parentFileCode = parentDir.getMdIndex().getFileCode();
-        String key = MdUtils.genMdIndexKey(parentFileCode, mdIndex.getName());
-        return createRdbDao.putFileMdIndex(key, new FileMdIndex(fileCode, isDir));
-    }
-
-    private MdAttrPos getMdAttrPos(DirMdIndex parentDir, String fileCode) {
-        List<Long> distrCodeList = parentDir.getDistrCodeList().getCodeList();
+    private MdAttrPos getMdAttrPos(NewDirMdIndex parentDir, String fileCode) {
+        List<Long> distrCodeList = parentDir.getDistrCodeList();
         long distrCode = distrCodeList.get(distrCodeList.size() - 1);
         boolean isFit = commonModule.checkDistrCodeFit(distrCode);
         MdAttrPos mdAttrPos = new MdAttrPos();
@@ -121,13 +111,13 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         return mdAttrPos;
     }
 
-    private boolean updateDistrCodeListWithNewCode(DirMdIndex parentDir, long newCode) {
-        String parentFileCode = parentDir.getMdIndex().getFileCode();
-        List<Long> distrCodeList = parentDir.getDistrCodeList().getCodeList();
+    //TODO
+    //先要得到保存父目录的键，再更新节点信息
+    private boolean updateDistrCodeListWithNewCode(NewDirMdIndex parentDir, long newCode) {
+        List<Long> distrCodeList = parentDir.getDistrCodeList();
         distrCodeList.add(newCode);
-        DistrCodeList distrCodeList1 = parentDir.getDistrCodeList();
-        distrCodeList1.setCodeList(distrCodeList);
-        return createRdbDao.putDistrCodeList(parentFileCode, distrCodeList1);
+        parentDir.setDistrCodeList(distrCodeList);
+        return createRdbDao.putNewDirIndex("", parentDir);
     }
 
 }

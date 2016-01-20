@@ -1,6 +1,6 @@
 package md.mgmt.utils;
 
-import md.mgmt.dao.entity.DirMdIndex;
+import md.mgmt.dao.entity.NewDirMdIndex;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,6 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class MdCacheUtils {
 
-    public static Map<String,DirMdIndex> dirMdIndexMap = new ConcurrentHashMap<String, DirMdIndex>();
+    public static Map<String,NewDirMdIndex> dirMdIndexMap = new ConcurrentHashMap<String, NewDirMdIndex>();
 
 }

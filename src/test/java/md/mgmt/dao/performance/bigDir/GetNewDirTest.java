@@ -10,24 +10,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Created by Mr-yang on 16-1-18.
  */
-public class GetBigDirTest extends BasePerformanceTest {
-    private static Logger logger = LoggerFactory.getLogger(GetBigDirTest.class);
-    private static String methodDesc = "GetBigDirTest";
+public class GetNewDirTest extends BasePerformanceTest {
+    private static Logger logger = LoggerFactory.getLogger(GetNewDirTest.class);
+    private static String methodDesc = "GetNewDirTest";
     @Autowired
     private FindRdbDao findRdbDao;
 
-    public GetBigDirTest() {
+    public GetNewDirTest() {
         super(logger, methodDesc);
     }
 
     @Override
     public long execMethod(int hotCount, int count) {
         for (int i = 1; i < hotCount; i++) {
-            findRdbDao.getBigDirMdIndex("key:" + i);
+            findRdbDao.getNewDirMdIndex("key:" + i);
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            findRdbDao.getBigDirMdIndex("key:" + i);
+            findRdbDao.getNewDirMdIndex("key:" + i);
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count %s  use Total time: %s ms, avg time: %sms",

@@ -5,19 +5,19 @@ import java.util.List;
 /**
  * Created by Mr-yang on 16-1-11.
  */
-public class BigDirMdIndex {
+public class NewDirMdIndex {
 
     private String fileCode;
     private boolean isDir;
-    private List<Long> codeList;
+    private List<Long> distrCodeList;
 
-    public BigDirMdIndex() {
+    public NewDirMdIndex() {
     }
 
-    public BigDirMdIndex(String fileCode, boolean isDir, List<Long> codeList) {
+    public NewDirMdIndex(String fileCode, boolean isDir, List<Long> distrCodeList) {
         this.fileCode = fileCode;
         this.isDir = isDir;
-        this.codeList = codeList;
+        this.distrCodeList = distrCodeList;
     }
 
     public String getFileCode() {
@@ -36,20 +36,20 @@ public class BigDirMdIndex {
         this.isDir = isDir;
     }
 
-    public List<Long> getCodeList() {
-        return codeList;
+    public List<Long> getDistrCodeList() {
+        return distrCodeList;
     }
 
-    public void setCodeList(List<Long> codeList) {
-        this.codeList = codeList;
+    public void setDistrCodeList(List<Long> distrCodeList) {
+        this.distrCodeList = distrCodeList;
     }
 
     @Override
     public String toString() {
-        return "BigDirMdIndex{" +
+        return "NewDirMdIndex{" +
                 "fileCode='" + fileCode + '\'' +
                 ", isDir=" + isDir +
-                ", codeList=" + codeList +
+                ", distrCodeList=" + distrCodeList +
                 '}';
     }
 }

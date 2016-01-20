@@ -1,9 +1,11 @@
 package md.mgmt.dao.impl;
 
 import com.alibaba.fastjson.JSON;
-import md.mgmt.base.md.MdIndex;
 import md.mgmt.dao.FindRdbDao;
-import md.mgmt.dao.entity.*;
+import md.mgmt.dao.entity.DirMdIndex;
+import md.mgmt.dao.entity.DistrCodeList;
+import md.mgmt.dao.entity.FileMdIndex;
+import md.mgmt.dao.entity.NewDirMdIndex;
 import md.mgmt.utils.MdUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,15 +18,14 @@ import org.springframework.stereotype.Component;
 public class FindRdbDaoImpl extends BaseRdb implements FindRdbDao {
     private static Logger logger = LoggerFactory.getLogger(CreateRdbDaoImpl.class);
 
-
     @Override
-    public DirMdIndex getParentDirMdIndexByPath(String path) {
+    public NewDirMdIndex getParentDirMdIndexByPath(String path) {
         if (path == null || path.equals("") || path.charAt(0) != '/') {
             logger.error("findParentDirCodeByPath params err: " + path);
             return null;
         }
         if (path.equals("/")) {
-            return getDirMdIndex(MdUtils.genMdIndexKey("-1", "/"));
+            return getNewDirMdIndex(MdUtils.genMdIndexKey("-1", "/"));
         }
         String[] nodes = path.split("/");
         nodes[0] = "/";
@@ -33,10 +34,10 @@ public class FindRdbDaoImpl extends BaseRdb implements FindRdbDao {
             code = getFileMdIndex(MdUtils.genMdIndexKey(code, nodes[i])).getFileCode();
         }
         if (code == null) {   //路径不存在
-            logger.error("路径不存在%s", path);
+            logger.error(String.format("path %s not exist.", path));
             return null;
         }
-        return getDirMdIndex(MdUtils.genMdIndexKey(code, nodes[nodes.length - 1]));
+        return getNewDirMdIndex(MdUtils.genMdIndexKey(code, nodes[nodes.length - 1]));
     }
 
     @Override
@@ -55,21 +56,10 @@ public class FindRdbDaoImpl extends BaseRdb implements FindRdbDao {
             code = getFileMdIndex(MdUtils.genMdIndexKey(code, nodes[i])).getFileCode();
         }
         if (code == null) {   //路径不存在
-            logger.error("路径不存在%s", path);
+            logger.error(String.format("path %s not exist.", path));
             return null;
         }
         return getFileMdIndex(MdUtils.genMdIndexKey(code, name));
-    }
-
-    @Override
-    public DirMdIndex getDirMd(MdIndex mdIndex) {
-        String newPath;
-        if (mdIndex.getPath().equals("/")) {
-            newPath = mdIndex.getPath() + mdIndex.getName();
-        } else {
-            newPath = mdIndex.getPath() + "/" + mdIndex.getName();
-        }
-        return getParentDirMdIndexByPath(newPath);
     }
 
     public DirMdIndex getDirMdIndex(String key) {
@@ -92,11 +82,11 @@ public class FindRdbDaoImpl extends BaseRdb implements FindRdbDao {
     }
 
     @Override
-    public BigDirMdIndex getBigDirMdIndex(String key) {
+    public NewDirMdIndex getNewDirMdIndex(String key) {
         try {
             byte[] indexBytes = db.get(key.getBytes(RDB_DECODE));
             if (indexBytes != null) {
-                return JSON.parseObject(new String(indexBytes, RDB_DECODE), BigDirMdIndex.class);
+                return JSON.parseObject(new String(indexBytes, RDB_DECODE), NewDirMdIndex.class);
             }
         } catch (Exception e) {
             logger.error(String.format("[ERROR] caught the unexpected exception -- %s\n", e));

@@ -2,7 +2,7 @@ package md.mgmt.dao.impl;
 
 import com.alibaba.fastjson.JSON;
 import md.mgmt.dao.CreateRdbDao;
-import md.mgmt.dao.entity.BigDirMdIndex;
+import md.mgmt.dao.entity.NewDirMdIndex;
 import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
 import org.slf4j.Logger;
@@ -46,7 +46,7 @@ public class CreateRdbDaoImpl extends BaseRdb implements CreateRdbDao {
     }
 
     @Override
-    public boolean putNewDirIndex(String key, BigDirMdIndex dirMdIndex) {
+    public boolean putNewDirIndex(String key, NewDirMdIndex dirMdIndex) {
         return put(key,dirMdIndex);
     }
 }

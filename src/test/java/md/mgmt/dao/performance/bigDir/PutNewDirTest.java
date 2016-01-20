@@ -2,7 +2,7 @@ package md.mgmt.dao.performance.bigDir;
 
 import md.mgmt.BasePerformanceTest;
 import md.mgmt.dao.CreateRdbDao;
-import md.mgmt.dao.entity.BigDirMdIndex;
+import md.mgmt.dao.entity.NewDirMdIndex;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,14 +14,14 @@ import java.util.List;
 /**
  * Created by Mr-yang on 16-1-20.
  */
-public class PutBigDirTest extends BasePerformanceTest {
-    private static Logger logger = LoggerFactory.getLogger(PutBigDirTest.class);
-    private static String methodDesc = "PutBigDirTest";
+public class PutNewDirTest extends BasePerformanceTest {
+    private static Logger logger = LoggerFactory.getLogger(PutNewDirTest.class);
+    private static String methodDesc = "PutNewDirTest";
 
     @Autowired
     private CreateRdbDao createRdbDao;
 
-    public PutBigDirTest() {
+    public PutNewDirTest() {
         super(logger, methodDesc);
     }
 
@@ -36,14 +36,14 @@ public class PutBigDirTest extends BasePerformanceTest {
         for (int i = 1; i < hotCount; i++) {
             List<Long> codes = new ArrayList<Long>();
             codes.add(code++);
-            BigDirMdIndex dirMdIndex = new BigDirMdIndex(i + "", true, codes);
+            NewDirMdIndex dirMdIndex = new NewDirMdIndex(i + "", true, codes);
             createRdbDao.putNewDirIndex("key:" + i, dirMdIndex);
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
             List<Long> codes = new ArrayList<Long>();
             codes.add(code++);
-            BigDirMdIndex dirMdIndex = new BigDirMdIndex(i + "", true, codes);
+            NewDirMdIndex dirMdIndex = new NewDirMdIndex(i + "", true, codes);
             createRdbDao.putNewDirIndex("key:" + i, dirMdIndex);
         }
         long end = System.currentTimeMillis();
