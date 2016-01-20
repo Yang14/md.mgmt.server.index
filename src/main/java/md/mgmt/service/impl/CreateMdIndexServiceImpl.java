@@ -113,7 +113,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
 
     //先要得到保存父目录的键，再更新节点信息
     private boolean updateDistrCodeListWithNewCode(DirMdIndex parentDir, String parentPath, long newCode) {
-        String key = "";
+        String key;
         if (parentPath.equals("/")) {
             key = MdUtils.genMdIndexKey("-1", "/");
         } else {
@@ -130,6 +130,9 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         int pos = path.lastIndexOf("/");
         String front = path.substring(0, pos);
         String end = path.substring(pos + 1);
+        if (front.equals("")) {
+            front = "/";
+        }
         DirMdIndex parentDir = getParentDirMdIndex(front);
         return MdUtils.genMdIndexKey(parentDir.getFileCode(), end);
     }
