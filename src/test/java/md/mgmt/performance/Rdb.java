@@ -2,7 +2,6 @@ package md.mgmt.performance;
 
 import com.alibaba.fastjson.JSON;
 import md.mgmt.dao.entity.FileMdIndex;
-import md.mgmt.dao.entity.MdIndexKey;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -98,8 +97,6 @@ public class Rdb {
             System.out.println("\n\n\n" + String.valueOf(System.currentTimeMillis()));
             long start = System.currentTimeMillis();
             for (int i = 0; i < count; i++) {
-                db.put(JSON.toJSONString(new MdIndexKey("a47486fa7be74ee08b9a7adf04afb7af", "a" + i)).getBytes(),
-                        (JSON.toJSONString(new FileMdIndex("a47486fa7be74ee08b9a7adf04afb7af", false))).getBytes());
             }
             long end = System.currentTimeMillis();
             logger.info(String.valueOf(System.currentTimeMillis()));

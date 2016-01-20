@@ -1,8 +1,8 @@
-package md.mgmt.dao.performance.bigDir;
+package md.mgmt.dao.performance;
 
 import md.mgmt.BasePerformanceTest;
 import md.mgmt.dao.CreateRdbDao;
-import md.mgmt.dao.entity.NewDirMdIndex;
+import md.mgmt.dao.entity.DirMdIndex;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,14 +36,14 @@ public class PutNewDirTest extends BasePerformanceTest {
         for (int i = 1; i < hotCount; i++) {
             List<Long> codes = new ArrayList<Long>();
             codes.add(code++);
-            NewDirMdIndex dirMdIndex = new NewDirMdIndex(i + "", true, codes);
+            DirMdIndex dirMdIndex = new DirMdIndex(i + "", true, codes);
             createRdbDao.putNewDirIndex("key:" + i, dirMdIndex);
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
             List<Long> codes = new ArrayList<Long>();
             codes.add(code++);
-            NewDirMdIndex dirMdIndex = new NewDirMdIndex(i + "", true, codes);
+            DirMdIndex dirMdIndex = new DirMdIndex(i + "", true, codes);
             createRdbDao.putNewDirIndex("key:" + i, dirMdIndex);
         }
         long end = System.currentTimeMillis();

@@ -3,15 +3,13 @@ package md.mgmt.service.impl;
 import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.base.ops.RenamedMd;
 import md.mgmt.common.CommonModule;
-import md.mgmt.dao.FindRdbDao;
 import md.mgmt.dao.CreateRdbDao;
-import md.mgmt.dao.entity.DirMdIndex;
-import md.mgmt.dao.entity.DistrCodeList;
+import md.mgmt.dao.FindRdbDao;
 import md.mgmt.dao.entity.FileMdIndex;
-import md.mgmt.dao.entity.NewDirMdIndex;
+import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.facade.resp.find.FileMdAttrPosList;
-import md.mgmt.utils.MdUtils;
 import md.mgmt.service.RenameMdIndexService;
+import md.mgmt.utils.MdUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +36,7 @@ public class RenameMdIndexServiceImpl implements RenameMdIndexService {
     @Override
     public FileMdAttrPosList renameMdIndex(RenamedMd renamedMd) {
         FileMdAttrPosList fileMdAttrPosList = new FileMdAttrPosList();
-        NewDirMdIndex dirMdIndex = findRdbDao.getParentDirMdIndexByPath(renamedMd.getPath());
+        DirMdIndex dirMdIndex = findRdbDao.getParentDirMdIndexByPath(renamedMd.getPath());
         if (dirMdIndex == null){
             return null;
         }

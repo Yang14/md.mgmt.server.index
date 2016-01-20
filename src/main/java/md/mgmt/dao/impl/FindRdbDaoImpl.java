@@ -3,9 +3,7 @@ package md.mgmt.dao.impl;
 import com.alibaba.fastjson.JSON;
 import md.mgmt.dao.FindRdbDao;
 import md.mgmt.dao.entity.DirMdIndex;
-import md.mgmt.dao.entity.DistrCodeList;
 import md.mgmt.dao.entity.FileMdIndex;
-import md.mgmt.dao.entity.NewDirMdIndex;
 import md.mgmt.utils.MdUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +17,7 @@ public class FindRdbDaoImpl extends BaseRdb implements FindRdbDao {
     private static Logger logger = LoggerFactory.getLogger(CreateRdbDaoImpl.class);
 
     @Override
-    public NewDirMdIndex getParentDirMdIndexByPath(String path) {
+    public DirMdIndex getParentDirMdIndexByPath(String path) {
         if (path == null || path.equals("") || path.charAt(0) != '/') {
             logger.error("findParentDirCodeByPath params err: " + path);
             return null;
@@ -62,31 +60,12 @@ public class FindRdbDaoImpl extends BaseRdb implements FindRdbDao {
         return getFileMdIndex(MdUtils.genMdIndexKey(code, name));
     }
 
-    public DirMdIndex getDirMdIndex(String key) {
-        try {
-            byte[] indexBytes = db.get(key.getBytes(RDB_DECODE));
-            if (indexBytes != null) {
-                FileMdIndex fileMdIndex = JSON.parseObject(new String(indexBytes, RDB_DECODE), FileMdIndex.class);
-                String fileCode = fileMdIndex.getFileCode();
-                byte[] distrCodeBytes = db.get(fileCode.getBytes(RDB_DECODE));
-                if (distrCodeBytes != null) {
-                    DistrCodeList distrCodeList = JSON.parseObject(
-                            new String(distrCodeBytes, RDB_DECODE), DistrCodeList.class);
-                    return new DirMdIndex(fileMdIndex, distrCodeList);
-                }
-            }
-        } catch (Exception e) {
-            logger.error(String.format("[ERROR] caught the unexpected exception -- %s\n", e));
-        }
-        return null;
-    }
-
     @Override
-    public NewDirMdIndex getNewDirMdIndex(String key) {
+    public DirMdIndex getNewDirMdIndex(String key) {
         try {
             byte[] indexBytes = db.get(key.getBytes(RDB_DECODE));
             if (indexBytes != null) {
-                return JSON.parseObject(new String(indexBytes, RDB_DECODE), NewDirMdIndex.class);
+                return JSON.parseObject(new String(indexBytes, RDB_DECODE), DirMdIndex.class);
             }
         } catch (Exception e) {
             logger.error(String.format("[ERROR] caught the unexpected exception -- %s\n", e));

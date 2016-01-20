@@ -1,41 +1,54 @@
 package md.mgmt.dao.entity;
 
+import java.util.List;
+
 /**
  * Created by Mr-yang on 16-1-11.
  */
 public class DirMdIndex {
 
-    private FileMdIndex mdIndex;
-    private DistrCodeList distrCodeList;
+    private String fileCode;
+    private boolean isDir;
+    private List<Long> distrCodeList;
 
     public DirMdIndex() {
     }
 
-    public DirMdIndex(FileMdIndex mdIndex, DistrCodeList distrCodeList) {
-        this.mdIndex = mdIndex;
+    public DirMdIndex(String fileCode, boolean isDir, List<Long> distrCodeList) {
+        this.fileCode = fileCode;
+        this.isDir = isDir;
         this.distrCodeList = distrCodeList;
     }
 
-    public FileMdIndex getMdIndex() {
-        return mdIndex;
+    public String getFileCode() {
+        return fileCode;
     }
 
-    public void setMdIndex(FileMdIndex mdIndex) {
-        this.mdIndex = mdIndex;
+    public void setFileCode(String fileCode) {
+        this.fileCode = fileCode;
     }
 
-    public DistrCodeList getDistrCodeList() {
+    public boolean isDir() {
+        return isDir;
+    }
+
+    public void setDir(boolean isDir) {
+        this.isDir = isDir;
+    }
+
+    public List<Long> getDistrCodeList() {
         return distrCodeList;
     }
 
-    public void setDistrCodeList(DistrCodeList distrCodeList) {
+    public void setDistrCodeList(List<Long> distrCodeList) {
         this.distrCodeList = distrCodeList;
     }
 
     @Override
     public String toString() {
         return "DirMdIndex{" +
-                "mdIndex=" + mdIndex +
+                "fileCode='" + fileCode + '\'' +
+                ", isDir=" + isDir +
                 ", distrCodeList=" + distrCodeList +
                 '}';
     }

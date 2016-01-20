@@ -1,4 +1,4 @@
-package md.mgmt.dao.performance.bigDir;
+package md.mgmt.dao.performance;
 
 import md.mgmt.BasePerformanceTest;
 import md.mgmt.dao.FindRdbDao;

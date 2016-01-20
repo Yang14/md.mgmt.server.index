@@ -1,7 +1,6 @@
 package md.mgmt.dao;
 
-import md.mgmt.dao.entity.NewDirMdIndex;
-import md.mgmt.dao.entity.DistrCodeList;
+import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.FileMdIndex;
 
 /**
@@ -14,13 +13,11 @@ public interface CreateRdbDao {
      */
     public boolean putFileMdIndex(String key, FileMdIndex fileMdIndex);
 
-    public boolean putDistrCodeList(String key, DistrCodeList distrCodeList);
-
     public void  removeFileMdIndex(String key);
 
     //--------------------------------------------
     public boolean put(String key, Object obj);
 
-    public boolean putNewDirIndex(String key,NewDirMdIndex dirMdIndex);
+    public boolean putNewDirIndex(String key,DirMdIndex dirMdIndex);
 
 }

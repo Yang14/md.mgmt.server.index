@@ -4,8 +4,8 @@ import md.mgmt.base.md.ClusterNodeInfo;
 import md.mgmt.base.md.MdIndex;
 import md.mgmt.common.CommonModule;
 import md.mgmt.dao.FindRdbDao;
+import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.FileMdIndex;
-import md.mgmt.dao.entity.NewDirMdIndex;
 import md.mgmt.facade.resp.find.DirMdAttrPosList;
 import md.mgmt.facade.resp.find.FileMdAttrPosList;
 import md.mgmt.service.FindMdIndexService;
@@ -32,7 +32,7 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
 
     @Override
     public FileMdAttrPosList findFileMdIndex(MdIndex mdIndex) {
-        NewDirMdIndex parentDir = getParentDirMdIndex(mdIndex.getPath());
+        DirMdIndex parentDir = getParentDirMdIndex(mdIndex.getPath());
         if (parentDir == null) {
             return null;
         }
@@ -45,11 +45,11 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
 
     @Override
     public DirMdAttrPosList findDirMdIndex(MdIndex mdIndex) {
-        NewDirMdIndex parentDir = getParentDirMdIndex(mdIndex.getPath());
+        DirMdIndex parentDir = getParentDirMdIndex(mdIndex.getPath());
         if (parentDir == null) {
             return null;
         }
-        NewDirMdIndex dirMdIndex = findRdbDao.getNewDirMdIndex(
+        DirMdIndex dirMdIndex = findRdbDao.getNewDirMdIndex(
                 MdUtils.genMdIndexKey(parentDir.getFileCode(), mdIndex.getName()));
         if (mdIndex.getPath().equals("/") && mdIndex.getName().equals("")) {
             dirMdIndex = parentDir;
@@ -59,8 +59,8 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
         return new DirMdAttrPosList(nodeInfoList);
     }
 
-    private NewDirMdIndex getParentDirMdIndex(String path) {
-        NewDirMdIndex parentDir = MdCacheUtils.dirMdIndexMap.get(path);
+    private DirMdIndex getParentDirMdIndex(String path) {
+        DirMdIndex parentDir = MdCacheUtils.dirMdIndexMap.get(path);
         if (parentDir == null) {
             parentDir = findRdbDao.getParentDirMdIndexByPath(path);
             if (parentDir == null) {

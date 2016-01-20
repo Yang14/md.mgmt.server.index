@@ -6,8 +6,8 @@ import md.mgmt.base.md.MdIndex;
 import md.mgmt.common.CommonModule;
 import md.mgmt.dao.CreateRdbDao;
 import md.mgmt.dao.FindRdbDao;
+import md.mgmt.dao.entity.DirMdIndex;
 import md.mgmt.dao.entity.FileMdIndex;
-import md.mgmt.dao.entity.NewDirMdIndex;
 import md.mgmt.facade.resp.index.MdAttrPos;
 import md.mgmt.service.CreateMdIndexService;
 import md.mgmt.utils.MdCacheUtils;
@@ -47,13 +47,13 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         String key = MdUtils.genMdIndexKey(parentCode, name);
         List<Long> codes = new ArrayList<Long>();
         codes.add(distrCode);
-        NewDirMdIndex dirMdIndex = new NewDirMdIndex(fileCode, true, codes);
+        DirMdIndex dirMdIndex = new DirMdIndex(fileCode, true, codes);
         return createRdbDao.putNewDirIndex(key, dirMdIndex);
     }
 
     @Override
     public MdAttrPos createFileMdIndex(MdIndex mdIndex) {
-        NewDirMdIndex parentDir = getParentDirMdIndex(mdIndex.getPath());
+        DirMdIndex parentDir = getParentDirMdIndex(mdIndex.getPath());
         if (parentDir == null) {
             return null;
         }
@@ -66,7 +66,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
 
     @Override
     public MdAttrPos createDirMdIndex(MdIndex mdIndex) {
-        NewDirMdIndex parentDir = getParentDirMdIndex(mdIndex.getPath());
+        DirMdIndex parentDir = getParentDirMdIndex(mdIndex.getPath());
         if (parentDir == null) {
             return null;
         }
@@ -74,12 +74,12 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         distrCodes.add(commonModule.genDistrCode());
         String fileCode = commonModule.genFileCode();
         String key = MdUtils.genMdIndexKey(parentDir.getFileCode(), mdIndex.getName());
-        createRdbDao.putNewDirIndex(key, new NewDirMdIndex(fileCode, true, distrCodes));
+        createRdbDao.putNewDirIndex(key, new DirMdIndex(fileCode, true, distrCodes));
         return getMdAttrPos(parentDir, fileCode);
     }
 
-    private NewDirMdIndex getParentDirMdIndex(String path) {
-        NewDirMdIndex parentDir = MdCacheUtils.dirMdIndexMap.get(path);
+    private DirMdIndex getParentDirMdIndex(String path) {
+        DirMdIndex parentDir = MdCacheUtils.dirMdIndexMap.get(path);
         if (parentDir == null) {
             parentDir = findRdbDao.getParentDirMdIndexByPath(path);
             if (parentDir == null) {
@@ -92,7 +92,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
         return parentDir;
     }
 
-    private MdAttrPos getMdAttrPos(NewDirMdIndex parentDir, String fileCode) {
+    private MdAttrPos getMdAttrPos(DirMdIndex parentDir, String fileCode) {
         List<Long> distrCodeList = parentDir.getDistrCodeList();
         long distrCode = distrCodeList.get(distrCodeList.size() - 1);
         boolean isFit = commonModule.checkDistrCodeFit(distrCode);
@@ -113,7 +113,7 @@ public class CreateMdIndexServiceImpl implements CreateMdIndexService {
 
     //TODO
     //先要得到保存父目录的键，再更新节点信息
-    private boolean updateDistrCodeListWithNewCode(NewDirMdIndex parentDir, long newCode) {
+    private boolean updateDistrCodeListWithNewCode(DirMdIndex parentDir, long newCode) {
         List<Long> distrCodeList = parentDir.getDistrCodeList();
         distrCodeList.add(newCode);
         parentDir.setDistrCodeList(distrCodeList);
