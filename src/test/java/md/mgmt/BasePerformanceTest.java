@@ -18,6 +18,7 @@ public abstract class BasePerformanceTest {
     private static int[] cycles = new int[]{10, 5, 3};
     private static int[] counts = new int[]{10000, 10000 * 10, 10000 * 100};
     private static int hotCount = 10000;
+    private static int cycleLen = 2;
 
 
     public BasePerformanceTest(Logger logger, String methodDesc) {
@@ -28,7 +29,7 @@ public abstract class BasePerformanceTest {
     public void moduleMethod() {
         logger.info("------------------start--------------------");
         logger.info(methodDesc);
-        for (int i = 0; i < cycles.length - 1; ++i) {
+        for (int i = 0; i < cycleLen; ++i) {
             calAvgTime(cycles[i], hotCount, counts[i]);
         }
         logger.info("-------------------end--------------------\n");

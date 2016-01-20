@@ -34,30 +34,26 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
 
     @Override
     public FileMdAttrPosList findFileMdIndex(MdIndex mdIndex) {
-        DirMdIndex parentDir =getParentDirMdIndex(mdIndex.getPath());
-        if (parentDir == null){
+        DirMdIndex parentDir = getParentDirMdIndex(mdIndex.getPath());
+        if (parentDir == null) {
             return null;
         }
         DistrCodeList distrCodeList = parentDir.getDistrCodeList();
         List<ClusterNodeInfo> clusterNodeInfos = commonModule.getMdLocationList(distrCodeList.getCodeList());
         FileMdIndex fileMdIndex = indexFindRdbDao.getFileMdIndex(
                 MdUtils.genMdIndexKey(parentDir.getMdIndex().getFileCode(), mdIndex.getName()));
-        FileMdAttrPosList fileMdAttrPosList = new FileMdAttrPosList();
-        fileMdAttrPosList.setClusterNodeInfos(clusterNodeInfos);
-        fileMdAttrPosList.setFileCode(fileMdIndex.getFileCode());
-        return fileMdAttrPosList;
-//        return new FileMdAttrPosList(clusterNodeInfos, fileMdIndex.getFileCode());
+        return new FileMdAttrPosList(clusterNodeInfos, fileMdIndex.getFileCode());
     }
 
     @Override
     public DirMdAttrPosList findDirMdIndex(MdIndex mdIndex) {
         DirMdIndex parentDir = getParentDirMdIndex(mdIndex.getPath());
-        if (parentDir == null){
+        if (parentDir == null) {
             return null;
         }
         DirMdIndex dirMdIndex = indexFindRdbDao.getDirMdIndex(
                 MdUtils.genMdIndexKey(parentDir.getMdIndex().getFileCode(), mdIndex.getName()));
-        if (mdIndex.getPath().equals("/")){
+        if (mdIndex.getPath().equals("/")) {
             dirMdIndex = parentDir;
         }
         DistrCodeList distrCodeList = dirMdIndex.getDistrCodeList();
@@ -65,15 +61,16 @@ public class FindMdIndexServiceImpl implements FindMdIndexService {
         return new DirMdAttrPosList(clusterNodeInfos);
     }
 
-    private DirMdIndex getParentDirMdIndex(String path){
+    private DirMdIndex getParentDirMdIndex(String path) {
         DirMdIndex parentDir = MdCacheUtils.dirMdIndexMap.get(path);
         if (parentDir == null) {
             parentDir = indexFindRdbDao.getParentDirMdIndexByPath(path);
             if (parentDir == null) {
-                logger.error(String.format("createMdIndex:can't find DirMdIndex %s",parentDir));
+                logger.error(String.format("createMdIndex:can't find DirMdIndex %s", parentDir));
                 return null;
             }
             MdCacheUtils.dirMdIndexMap.put(path, parentDir);
+            logger.info("cache failed..." + parentDir.getMdIndex());
         }
         return parentDir;
     }

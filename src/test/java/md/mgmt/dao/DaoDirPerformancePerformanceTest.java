@@ -50,7 +50,7 @@ public class DaoDirPerformancePerformanceTest  {
     public void testPutDirMdIndex() {
         int cycle = 1;
         int hotCount = 10000 * 10;
-        int count = 10000 * 100;
+        int count = 10000*10;
         for (int i = 0; i < cycle; ++i) {
             logger.info(String.format("testPutDirMdIndex round %s:", i + 1));
             logger.info(String.format("hotCount: %s, count: %s", hotCount, count));

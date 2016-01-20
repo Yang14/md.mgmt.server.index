@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Created by Mr-yang on 16-1-18.
  */
-public class TestCreateFileMdIndexService extends BasePerformanceTest{
+public class TestCreateFileMdIndexService extends BasePerformanceTest {
     private static Logger logger = LoggerFactory.getLogger(TestCreateFileMdIndexService.class);
     private static String methodDesc = "testCreateFileMdIndex";
 
@@ -32,12 +32,13 @@ public class TestCreateFileMdIndexService extends BasePerformanceTest{
 
     @Override
     public long execMethod(int hotCount, int count) {
+        String path = "/home";
         for (int i = 1; i < hotCount; i++) {
-            createMdIndexService.createFileMdIndex(new MdIndex("/home/a", "testFile" + i));
+            createMdIndexService.createFileMdIndex(new MdIndex(path, "testFile" + i));
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            createMdIndexService.createFileMdIndex(new MdIndex("/home/a", "testFile" + i));
+            createMdIndexService.createFileMdIndex(new MdIndex(path, "testFile" + i));
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count: %s  use Total time: %s ms, avg time: %sms",
@@ -46,7 +47,7 @@ public class TestCreateFileMdIndexService extends BasePerformanceTest{
     }
 
     @Test
-    public void testCreateFileMdIndex(){
+    public void testCreateFileMdIndex() {
         moduleMethod();
     }
 }

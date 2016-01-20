@@ -24,7 +24,7 @@ public class TestFindFileMdIndexService extends BasePerformanceTest{
 
     @Override
     public long execMethod(int hotCount, int count) {
-        String path = "/";
+        String path = "/home/a";
         for (int i = 1; i < hotCount; i++) {
             findMdIndexService.findFileMdIndex(new MdIndex(path, "testFile" + i));
         }

@@ -23,11 +23,11 @@ public class DaoGetFileMdIndex extends BasePerformanceTest {
     @Override
     public long execMethod(int hotCount, int count) {
         for (int i = 1; i < hotCount; i++) {
-            indexFindRdbDao.getFileMdIndex("key:" + i);
+            indexFindRdbDao.getFileMdIndex("f-100000:testFile" + i);
         }
         long start = System.currentTimeMillis();
         for (int i = 1; i < count; i++) {
-            indexFindRdbDao.getFileMdIndex("key:" + i);
+            indexFindRdbDao.getFileMdIndex("f-100000:testFile" + i);
         }
         long end = System.currentTimeMillis();
         logger.info(String.format("count %s  use Total time: %s ms, avg time: %sms",
